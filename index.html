@@ -84,11 +84,11 @@
         .promo-image {
             width: 100%;
             height: auto;
-            filter: drop-shadow(0 0 50px rgba(0, 242, 255, 0.15));
+            filter: drop-shadow(0 0 40px rgba(0, 242, 255, 0.2));
             border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             display: block;
-            object-fit: cover;
+            margin: 0 auto;
         }
 
         .promo-overlay {
@@ -96,8 +96,9 @@
             bottom: 0;
             left: 0;
             right: 0;
-            height: 150px;
+            height: 100px;
             background: linear-gradient(to top, #05070a, transparent);
+            pointer-events: none;
         }
     </style>
 </head>
@@ -121,8 +122,8 @@
                 Оптимизация <br><span class="text-[#00f2ff]">BF6</span>
             </h1>
             <p class="text-gray-400 text-base md:text-lg max-w-2xl mx-auto font-light tracking-wide">
-                Профессиональные конфигурации для максимальной производительности и стабильного FPS. 
-                Полностью бесплатно и безопасно.
+                Профессиональные конфигурации для максимальной производительности. 
+                Бесплатно и безопасно.
             </p>
             
             <a href="#config-grid" class="mt-8 flex flex-col items-center text-[10px] font-bold uppercase tracking-[0.4em] text-[#00f2ff] hover:text-white transition">
@@ -130,9 +131,9 @@
                 <i class="fas fa-chevron-down mt-2 text-xl"></i>
             </a>
 
-            <!-- Использование нового имени файла -->
             <div class="promo-container">
-                <img src="BF6%20Soldiers.jpg" alt="BF6 Soldiers" class="promo-image">
+                <!-- Путь изменен на BF6%20Soldiers.jpg согласно вашему запросу -->
+                <img src="BF6%20Soldiers.jpg" id="mainPromo" alt="BF6 Soldiers" class="promo-image">
                 <div class="promo-overlay"></div>
             </div>
         </section>
@@ -150,7 +151,7 @@
     <section id="view-product" class="view-section py-16 px-6 hidden">
         <div class="max-w-4xl mx-auto">
             <button onclick="showView('home')" class="mb-8 text-gray-500 hover:text-white transition flex items-center uppercase text-xs font-bold tracking-widest">
-                <i class="fas fa-chevron-left mr-2"></i> Вернуться назад
+                <i class="fas fa-chevron-left mr-2"></i> Назад
             </button>
             <div class="glass p-8 md:p-12 rounded-3xl" id="product-content"></div>
         </div>
@@ -160,7 +161,7 @@
         <div class="max-w-md mx-auto glass p-8 rounded-2xl text-center">
             <h2 class="text-2xl font-black mb-6 uppercase">CMS Вход</h2>
             <input type="password" id="admin-pass" placeholder="Пароль" class="w-full bg-black/40 border border-white/10 p-3 rounded mb-6 outline-none focus:border-[#00f2ff]">
-            <button class="w-full btn-cyan py-3 font-bold uppercase tracking-widest">Авторизация</button>
+            <button class="w-full btn-cyan py-3 font-bold uppercase tracking-widest">Войти</button>
         </div>
     </section>
 
