@@ -249,7 +249,7 @@
             {
                 id: 'zenith',
                 title: 'Frostbite Zenith',
-                file: 'Frostbite Zenith.zip',
+                file: 'Frostbite Zenith (3).zip',
                 icon: 'fas fa-crown text-[#00f2ff]',
                 color: 'text-[#00f2ff]',
                 desc: 'Король всех пресетов. Сбалансированная настройка освещения, теней и постобработки. Вы получаете картинку уровня "High", а производительность — как на "Low".',
@@ -372,7 +372,6 @@
         }
 
         function downloadAll() {
-            // Скачиваем каждый файл из списка с задержкой, чтобы браузер не заблокировал массовое скачивание
             configData.forEach((cfg, index) => {
                 setTimeout(() => {
                     download(cfg.file);
@@ -410,7 +409,6 @@
             a.href = u; a.download = 'user.cfg'; a.click();
         }
 
-        // Запуск
         initGrid();
     </script>
 </body>
