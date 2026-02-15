@@ -131,7 +131,7 @@
         <div class="flex items-center space-x-8">
             <span onclick="showView('home')" class="tab-link active" id="nav-home">Database</span>
             <span onclick="showView('ai')" class="tab-link" id="nav-ai">Neural Engine</span>
-            <button onclick="download('Frostbite Zenith.zip')" class="neo-btn px-5 py-2 text-[10px]">ALL CFG</button>
+            <button onclick="downloadAll()" class="neo-btn px-5 py-2 text-[10px]">ALL CFG</button>
         </div>
     </nav>
 
@@ -369,6 +369,15 @@
             a.href = file;
             a.download = file;
             a.click();
+        }
+
+        function downloadAll() {
+            // Скачиваем каждый файл из списка с задержкой, чтобы браузер не заблокировал массовое скачивание
+            configData.forEach((cfg, index) => {
+                setTimeout(() => {
+                    download(cfg.file);
+                }, index * 300);
+            });
         }
 
         async function generateAi() {
