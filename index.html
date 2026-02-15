@@ -23,7 +23,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(rgba(5, 7, 10, 0.8), rgba(5, 7, 10, 0.95)), url('bf6.jpg');
+            background: linear-gradient(rgba(5, 7, 10, 0.8), rgba(5, 7, 10, 0.95)), url('https://i.ytimg.com/vi/S7v-N9ApxhY/maxresdefault.jpg');
             background-size: cover;
             background-position: center;
             z-index: -1;
@@ -47,7 +47,7 @@
         }
 
         .hero-section {
-            min-height: 100vh;
+            min-height: 60vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -55,30 +55,37 @@
             padding: 100px 24px 40px 24px;
         }
 
-        .promo-container {
-            width: 100%;
-            max-width: 900px;
-            margin-top: 3rem;
-            position: relative;
-        }
-
-        .promo-image {
-            width: 100%;
-            height: auto;
-            border-radius: 12px;
-            box-shadow: 0 0 40px rgba(0, 242, 255, 0.1);
-            display: block;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
         .card-hover:hover {
-            border-color: #00f2ff;
+            border-color: currentColor;
             transform: translateY(-5px);
             background: rgba(15, 23, 42, 0.8);
         }
 
         .view-section { animation: fadeIn 0.5s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .tutorial-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: rgba(255,255,255,0.03);
+            border-radius: 12px;
+            border-left: 3px solid #00f2ff;
+        }
+        .step-number {
+            background: #00f2ff;
+            color: #000;
+            font-weight: 900;
+            min-width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            font-size: 0.75rem;
+        }
     </style>
 </head>
 <body class="min-h-screen">
@@ -100,42 +107,30 @@
             <h1 class="text-6xl md:text-8xl font-black mb-4 uppercase tracking-tighter leading-none">
                 Оптимизация <br><span class="text-[#00f2ff]">BF6</span>
             </h1>
-            <p class="text-gray-400 text-base md:text-lg max-w-2xl mx-auto font-light tracking-wide mb-8">
-                Профессиональные конфигурации для максимальной производительности. 
-                Бесплатно и безопасно.
+            <p class="text-gray-400 text-base md:text-lg max-w-2xl mx-auto font-light tracking-wide">
+                10 профессиональных конфигураций для максимальной производительности, сетевой стабильности и FPS.
             </p>
-
-            <!-- Контейнер для фото -->
-            <div class="promo-container">
-                <img 
-                    src="BF6%20Soldiers.jpg" 
-                    id="promoImg" 
-                    alt="BF6 Soldiers" 
-                    class="promo-image"
-                    onerror="handleImageError(this)"
-                >
-            </div>
             
-            <a href="#config-grid" class="mt-12 flex flex-col items-center text-[10px] font-bold uppercase tracking-[0.4em] text-[#00f2ff] hover:text-white transition">
+            <a href="#config-grid" class="mt-16 flex flex-col items-center text-[10px] font-bold uppercase tracking-[0.4em] text-[#00f2ff] hover:text-white transition">
                 Листай вниз
                 <i class="fas fa-chevron-down mt-2 text-xl"></i>
             </a>
         </section>
 
-        <section id="config-grid" class="py-20 px-6 max-w-6xl mx-auto">
+        <section id="config-grid" class="py-20 px-6 max-w-7xl mx-auto">
             <div class="flex items-center space-x-4 mb-12">
                 <div class="h-px flex-1 bg-white/10"></div>
                 <h2 class="text-2xl font-black uppercase tracking-widest text-center">Доступные пресеты</h2>
                 <div class="h-px flex-1 bg-white/10"></div>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
         </section>
     </main>
 
     <section id="view-product" class="view-section py-16 px-6 hidden">
         <div class="max-w-4xl mx-auto">
             <button onclick="showView('home')" class="mb-8 text-gray-500 hover:text-white transition flex items-center uppercase text-xs font-bold tracking-widest">
-                <i class="fas fa-chevron-left mr-2"></i> Назад
+                <i class="fas fa-chevron-left mr-2"></i> Назад к списку
             </button>
             <div class="glass p-8 md:p-12 rounded-3xl" id="product-content"></div>
         </div>
@@ -154,26 +149,31 @@
     </footer>
 
     <script>
-        // Функция для исправления путей к картинке на лету
-        function handleImageError(img) {
-            const currentSrc = img.src;
-            if (currentSrc.includes('%20')) {
-                // Если с %20 не вышло, пробуем с обычным пробелом
-                img.src = "BF6 Soldiers.jpg";
-            } else if (!currentSrc.includes('.JPG') && !currentSrc.includes('.png')) {
-                // Если и так не вышло, пробуем изменить регистр расширения
-                img.src = "BF6 Soldiers.png";
-            }
-        }
-
         const products = {
-            'zenith': { title: 'Frostbite Zenith', desc: 'Сбалансированный конфиг. Убирает визуальный шум и оптимизирует нагрузку на GPU.', file: 'Frostbite Zenith.zip', accent: '#00f2ff', icon: 'fa-adjust' },
+            'zenith': { title: 'Frostbite Zenith', desc: 'Сбалансированный конфиг. Убирает визуальный шум и оптимизирует нагрузку.', file: 'Frostbite Zenith.zip', accent: '#00f2ff', icon: 'fa-adjust' },
             'ultrafps': { title: 'ZERO LAG ULTRA FPS', desc: 'Экстремальный прирост FPS. Идеально для слабых систем.', file: 'ZERO_LAG_ULTRA_FPS.zip', accent: '#f97316', icon: 'fa-tachometer-alt' },
-            'hdd-fast': { title: 'HDD Fast Streaming', desc: 'Улучшает подгрузку данных на HDD.', file: 'HDD Fast Streaming.rar', accent: '#22c55e', icon: 'fa-hdd' },
-            'max-fps-ai': { title: 'Max FPS Ai cfg', desc: 'Конфиг, оптимизированный нейросетью.', file: 'Max FPS Ai cfg.rar', accent: '#a855f7', icon: 'fa-robot' },
-            'pro-comp': { title: 'Pro-Competitive', desc: 'Киберспортивный пресет для лучшей видимости.', file: 'Pro-Competitive.rar', accent: '#eab308', icon: 'fa-trophy' },
-            'stutter-fix': { title: 'HDD Anti-Stutter', desc: 'Устраняет рывки изображения на HDD.', file: 'HDD Anti-Stutter.rar', accent: '#ef4444', icon: 'fa-wave-square' }
+            'net-master': { title: 'NETWORK MASTER', desc: 'Оптимизация сетевых пакетов. Уменьшает пинг и задержку (hitreg).', file: 'NETWORK MASTER.rar', accent: '#3b82f6', icon: 'fa-wifi' },
+            'rtx-ultra': { title: 'RTX ULTRA PERFORMANCE', desc: 'Специально для видеокарт 30 и 40 серии. Максимальный DLSS и Reflex.', file: 'RTX ULTRA PERFORMANCE (Для 30 40 серии).rar', accent: '#22c55e', icon: 'fa-microchip' },
+            'cpu-stable': { title: 'CPU STABILITY', desc: 'Снижает нагрузку на процессор, устраняя фризы и статтеры.', file: 'CPU STABILITY.rar', accent: '#ef4444', icon: 'fa-bolt' },
+            'max-fps-ai': { title: 'Max FPS Ai cfg', desc: 'Конфиг, оптимизированный алгоритмами ИИ для баланса.', file: 'Max FPS Ai cfg.rar', accent: '#a855f7', icon: 'fa-robot' },
+            'pro-comp': { title: 'Pro-Competitive', desc: 'Настройки как у про-игроков. Четкость и видимость противников.', file: 'Pro-Competitive.rar', accent: '#eab308', icon: 'fa-crosshairs' },
+            'hdd-fast': { title: 'HDD Fast Streaming', desc: 'Ускоряет загрузку текстур и моделей на классических дисках.', file: 'HDD Fast Streaming.rar', accent: '#06b6d4', icon: 'fa-hdd' },
+            'hdd-stutter': { title: 'HDD Anti-Stutter', desc: 'Исправляет подвисания при подгрузке карты во время боя.', file: 'HDD Anti-Stutter.rar', accent: '#f43f5e', icon: 'fa-wave-square' },
+            'global-fix': { title: 'GLOBAL SYSTEM FIX', desc: 'Комплексное исправление системных задержек в BF6.', file: 'GLOBAL_FIX.rar', accent: '#ffffff', icon: 'fa-tools' }
         };
+
+        const tutorialSteps = [
+            "Выберите подходящий пресет из списка выше.",
+            "Нажмите на кнопку 'СКАЧАТЬ КОНФИГ'.",
+            "Дождитесь окончания загрузки архива на ваш ПК.",
+            "Откройте загруженный архив (.zip или .rar).",
+            "Перейдите в папку: Документы / Battlefield 6 / settings.",
+            "Сделайте резервную копию ваших старых файлов (на всякий случай).",
+            "Перенесите файлы из архива в папку settings с заменой.",
+            "Нажмите правой кнопкой на перенесенные файлы -> Свойства -> Только чтение (необязательно).",
+            "Запустите Battlefield 6.",
+            "Наслаждайтесь плавным геймплеем и высоким FPS!"
+        ];
 
         function renderGrid() {
             const grid = document.querySelector('#config-grid .grid');
@@ -182,31 +182,57 @@
             Object.entries(products).forEach(([id, p]) => {
                 const card = document.createElement('div');
                 card.onclick = () => showProduct(id);
-                card.className = "glass p-8 rounded-3xl cursor-pointer card-hover transition-all border border-white/5 flex flex-col justify-between";
+                card.className = "glass p-6 rounded-3xl cursor-pointer card-hover transition-all border border-white/5 flex flex-col justify-between";
+                card.style.color = p.accent;
                 card.innerHTML = `
                     <div>
-                        <i class="fas ${p.icon} text-3xl mb-4" style="color: ${p.accent}"></i>
-                        <h2 class="text-xl font-black uppercase mb-2">${p.title}</h2>
-                        <p class="text-gray-400 text-sm mb-6">${p.desc}</p>
+                        <div class="w-12 h-12 rounded-xl mb-4 flex items-center justify-center bg-white/5">
+                            <i class="fas ${p.icon} text-2xl"></i>
+                        </div>
+                        <h2 class="text-lg font-black uppercase mb-2 text-white">${p.title}</h2>
+                        <p class="text-gray-400 text-xs mb-6 font-light leading-relaxed">${p.desc}</p>
                     </div>
-                    <div class="font-bold uppercase text-[10px] tracking-widest" style="color: ${p.accent}">Открыть <i class="fas fa-arrow-right ml-1"></i></div>
+                    <div class="font-bold uppercase text-[9px] tracking-widest opacity-80">Детали конфига <i class="fas fa-arrow-right ml-1 text-[8px]"></i></div>
                 `;
                 grid.appendChild(card);
             });
         }
 
         function showView(viewId) {
-            ['home', 'product', 'admin'].forEach(v => document.getElementById('view-' + v).classList.add('hidden'));
+            ['home', 'product', 'admin'].forEach(v => {
+                const el = document.getElementById('view-' + v);
+                if(el) el.classList.add('hidden');
+            });
             document.getElementById('view-' + viewId).classList.remove('hidden');
             window.scrollTo(0, 0);
         }
 
         function showProduct(id) {
             const p = products[id];
+            let tutorialHtml = '<div class="mt-12 mb-8 text-left"><h3 class="text-xl font-black uppercase mb-6 tracking-wider">Инструкция по установке:</h3>';
+            tutorialSteps.forEach((step, index) => {
+                tutorialHtml += `
+                    <div class="tutorial-step" style="border-left-color: ${p.accent}">
+                        <div class="step-number" style="background: ${p.accent}">${index + 1}</div>
+                        <p class="text-sm text-gray-300 font-light leading-snug">${step}</p>
+                    </div>
+                `;
+            });
+            tutorialHtml += '</div>';
+
             document.getElementById('product-content').innerHTML = `
-                <h1 class="text-4xl font-black uppercase mb-4" style="color: ${p.accent}">${p.title}</h1>
-                <p class="text-gray-300 mb-8">${p.desc}</p>
-                <a href="${p.file}" download class="btn-cyan px-12 py-5 font-black uppercase tracking-widest text-sm inline-block" style="background: ${p.accent}">Скачать конфиг</a>
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8 text-left">
+                    <div>
+                        <div class="flex items-center gap-3 mb-2">
+                             <i class="fas ${p.icon} text-2xl" style="color: ${p.accent}"></i>
+                             <h1 class="text-3xl md:text-4xl font-black uppercase" style="color: ${p.accent}">${p.title}</h1>
+                        </div>
+                        <p class="text-gray-300 max-w-xl">${p.desc}</p>
+                    </div>
+                    <a href="${p.file}" download class="btn-cyan px-8 py-4 font-black uppercase tracking-widest text-xs text-center rounded-xl whitespace-nowrap" style="background: ${p.accent}">Скачать конфиг</a>
+                </div>
+                <div class="h-px bg-white/10 w-full mb-8"></div>
+                ${tutorialHtml}
             `;
             showView('product');
         }
