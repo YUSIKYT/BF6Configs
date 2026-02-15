@@ -79,16 +79,21 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding-top: 80px;
+            padding: 100px 24px;
         }
 
         .promo-image {
-            max-width: 800px;
-            width: 95%;
-            margin: 40px auto;
-            filter: drop-shadow(0 0 30px rgba(0, 242, 255, 0.15));
-            border-radius: 12px;
-            display: block;
+            max-width: 900px;
+            width: 100%;
+            margin-top: 50px;
+            filter: drop-shadow(0 0 30px rgba(0, 242, 255, 0.2));
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.5s ease;
+        }
+        
+        .promo-image:hover {
+            transform: scale(1.02);
         }
     </style>
 </head>
@@ -110,22 +115,24 @@
     <!-- Вью: Главная -->
     <main id="view-home" class="view-section">
         <!-- Герой-блок -->
-        <section class="hero-section px-6 text-center">
+        <section class="hero-section text-center">
             <h1 class="text-6xl md:text-8xl font-black mb-4 uppercase tracking-tighter leading-none">
                 Оптимизация <br><span class="text-[#00f2ff]">BF6</span>
             </h1>
             <p class="text-gray-400 text-base md:text-lg max-w-2xl mx-auto font-light tracking-wide">
-                Профессиональные конфигурации для максимальной производительности. 
-                Бесплатно и безопасно.
+                Профессиональные конфигурации для максимальной производительности и стабильного FPS. 
+                Полностью бесплатно и безопасно.
             </p>
             
-            <a href="#config-grid" class="mt-8 flex flex-col items-center text-[10px] font-bold uppercase tracking-[0.4em] text-[#00f2ff] hover:text-white transition group">
+            <a href="#config-grid" class="mt-8 mb-4 flex flex-col items-center text-[10px] font-bold uppercase tracking-[0.4em] text-[#00f2ff] hover:text-white transition group">
                 Листай вниз
                 <i class="fas fa-chevron-down mt-2 text-xl scroll-indicator"></i>
             </a>
 
-            <!-- Промо-фото с названием image.png -->
-            <img src="image.png" alt="BF6 Soldiers" class="promo-image" onerror="this.src='image_e357e5.png'; this.onerror=function(){this.style.display='none'}">
+            <!-- Центральное промо-фото: BF6 Soldiers.jpg -->
+            <div class="relative w-full flex justify-center">
+                <img src="BF6 Soldiers.jpg" alt="BF6 Soldiers" class="promo-image" onerror="this.src='image_e357e5.png'; this.onerror=function(){this.style.display='none'}">
+            </div>
         </section>
 
         <!-- Сетка конфигов -->
@@ -137,7 +144,7 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Карточки генерируются скриптом ниже -->
+                <!-- Генерируется через JS -->
             </div>
         </section>
     </main>
@@ -152,7 +159,6 @@
             <div class="glass p-8 md:p-12 rounded-3xl">
                 <div id="product-content"></div>
 
-                <!-- Гайд -->
                 <div class="mt-12 pt-12 border-t border-white/10">
                     <h3 class="text-xl font-black uppercase mb-8 flex items-center">
                         <i class="fas fa-terminal mr-3 text-[#00f2ff]"></i> Гайд по установке
@@ -168,7 +174,7 @@
                         </div>
                         <div class="flex items-start">
                             <div class="w-8 h-8 rounded-lg bg-[#00f2ff]/10 flex items-center justify-center mr-4 text-[#00f2ff] font-black shrink-0">3</div>
-                            <p class="text-gray-300 text-sm leading-relaxed pt-1">Скопируйте <b>user.cfg</b> в эту папку с заменой.</p>
+                            <p class="text-gray-300 text-sm leading-relaxed pt-1">Перетащите <b>user.cfg</b> в папку с заменой.</p>
                         </div>
                     </div>
                 </div>
@@ -193,42 +199,42 @@
         const products = {
             'zenith': {
                 title: 'Frostbite Zenith',
-                desc: 'Сбалансированный конфиг для улучшения стабильности. Оптимизирует рендеринг и убирает задержки.',
+                desc: 'Сбалансированный конфиг. Убирает визуальный шум и оптимизирует нагрузку на GPU.',
                 file: 'Frostbite Zenith.zip',
                 accent: '#00f2ff',
                 icon: 'fa-adjust'
             },
             'ultrafps': {
                 title: 'ZERO LAG ULTRA FPS',
-                desc: 'Максимально возможный FPS. Отключает лишние эффекты для наилучшей производительности.',
+                desc: 'Экстремальный прирост FPS. Идеально для слабых систем и соревновательного геймплея.',
                 file: 'ZERO_LAG_ULTRA_FPS.zip',
                 accent: '#f97316',
                 icon: 'fa-tachometer-alt'
             },
             'hdd-fast': {
                 title: 'HDD Fast Streaming',
-                desc: 'Оптимизация стриминга текстур. Помогает избежать подтормаживаний на HDD дисках.',
+                desc: 'Улучшает подгрузку данных на HDD, минимизируя фризы при перемещении по карте.',
                 file: 'HDD Fast Streaming.rar',
                 accent: '#22c55e',
                 icon: 'fa-hdd'
             },
             'max-fps-ai': {
                 title: 'Max FPS Ai cfg',
-                desc: 'Конфиг от ИИ. Тонкая настройка многопоточности и управления памятью Frostbite.',
+                desc: 'Продвинутый конфиг, оптимизированный нейросетью для лучшего распределения потоков CPU.',
                 file: 'Max FPS Ai cfg.rar',
                 accent: '#a855f7',
                 icon: 'fa-robot'
             },
             'pro-comp': {
                 title: 'Pro-Competitive',
-                desc: 'Киберспортивные настройки. Максимум видимости противников и минимальный инпут-лаг.',
+                desc: 'Киберспортивный пресет. Чистая картинка без лишнего мусора для лучшего обнаружения целей.',
                 file: 'Pro-Competitive.rar',
                 accent: '#eab308',
                 icon: 'fa-trophy'
             },
             'stutter-fix': {
                 title: 'HDD Anti-Stutter',
-                desc: 'Устранение микро-фризов и заиканий изображения в интенсивных сценах.',
+                desc: 'Устраняет рывки и нестабильное время кадра на конфигурациях с медленной памятью.',
                 file: 'HDD Anti-Stutter.rar',
                 accent: '#ef4444',
                 icon: 'fa-wave-square'
@@ -250,7 +256,7 @@
                         <p class="text-gray-400 text-sm mb-6 leading-relaxed">${p.desc}</p>
                     </div>
                     <div class="font-bold uppercase text-[10px] tracking-widest" style="color: ${p.accent}">
-                        Открыть пресет <i class="fas fa-arrow-right ml-1"></i>
+                        Открыть <i class="fas fa-arrow-right ml-1"></i>
                     </div>
                 `;
                 grid.appendChild(card);
@@ -271,13 +277,13 @@
                 <div class="flex flex-col md:flex-row md:items-center justify-between gap-8 mb-10 text-center md:text-left">
                     <div>
                         <h1 class="text-4xl md:text-5xl font-black uppercase mb-2" style="color: ${p.accent}">${p.title}</h1>
-                        <p class="text-xs font-bold uppercase tracking-widest text-[#00f2ff]">Бесплатная загрузка (.${p.file.split('.').pop()})</p>
+                        <p class="text-xs font-bold uppercase tracking-widest text-[#00f2ff]">Архив: ${p.file} | Безопасно</p>
                     </div>
-                    <a href="${p.file}" class="btn-cyan px-12 py-5 font-black uppercase tracking-widest text-sm" style="background: ${p.accent}">
-                        Скачать сейчас
+                    <a href="${p.file}" download class="btn-cyan px-12 py-5 font-black uppercase tracking-widest text-sm" style="background: ${p.accent}">
+                        Скачать
                     </a>
                 </div>
-                <p class="text-xl text-gray-300 leading-relaxed font-light text-center md:text-left">${p.desc}</p>
+                <p class="text-xl text-gray-300 leading-relaxed font-light">${p.desc}</p>
             `;
             document.getElementById('product-content').innerHTML = content;
             showView('product');
