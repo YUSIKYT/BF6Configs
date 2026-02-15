@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BF6 Config Store | Professional Optimization</title>
+    <title>CFG ДЛЯ BF6 | Professional Optimization</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body { 
@@ -13,7 +13,6 @@
             overflow-x: hidden;
         }
         .hero-bg {
-            /* Фоновый цвет добавлен на случай задержки загрузки bf6.jpg */
             background-color: #07080a;
             background-image: radial-gradient(circle at top right, rgba(59, 130, 246, 0.2), transparent),
                               linear-gradient(rgba(7, 8, 10, 0.6), rgba(7, 8, 10, 0.9)), 
@@ -37,29 +36,38 @@
         .step-number {
             background: linear-gradient(135deg, #3b82f6, #2563eb);
             color: white;
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
+            min-width: 36px;
+            height: 36px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
-            font-weight: 800;
-            box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
+            font-size: 16px;
+            font-weight: 900;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
         }
         .glow-text {
             text-shadow: 0 0 30px rgba(59, 130, 246, 0.4);
         }
-        .scanline {
-            width: 100%;
-            height: 2px;
-            background: rgba(59, 130, 246, 0.2);
-            position: absolute;
-            animation: scan 4s linear infinite;
+        .glow-text-purple {
+            text-shadow: 0 0 30px rgba(168, 85, 247, 0.4);
         }
-        @keyframes scan {
-            0% { top: 0; }
-            100% { top: 100%; }
+        .path-box {
+            background: #000;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 11px;
+            color: #3b82f6;
+            border: 1px border rgba(59, 130, 246, 0.2);
+            margin-top: 8px;
+            word-break: break-all;
+        }
+        .btn-purple {
+            background: #7c3aed;
+        }
+        .btn-purple:hover {
+            background: #6d28d9;
         }
     </style>
 </head>
@@ -68,14 +76,13 @@
     <!-- Навигация -->
     <header class="p-5 md:px-12 flex justify-between items-center border-b border-white/5 bg-[#07080a]/80 backdrop-blur-xl sticky top-0 z-50">
         <div onclick="showSection('main')" class="flex items-center gap-3 cursor-pointer group">
-            <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center font-black italic text-xl group-hover:rotate-12 transition-transform">B</div>
+            <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center font-black italic text-xl group-hover:rotate-12 transition-transform">C</div>
             <h1 class="text-xl font-black tracking-tighter uppercase italic">
-                BF6<span class="text-blue-500">STORE</span>
+                CFG ДЛЯ <span class="text-blue-500">BF6</span>
             </h1>
         </div>
         <nav class="hidden md:flex gap-8 items-center">
             <a href="#" onclick="showSection('main')" class="text-[10px] font-bold uppercase tracking-[0.2em] hover:text-blue-500 transition">Каталог</a>
-            <a href="#" class="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500 hover:text-white transition">Поддержка</a>
             <div class="h-4 w-[1px] bg-white/10"></div>
             <span class="text-[10px] font-black text-blue-500 bg-blue-500/10 px-3 py-1 rounded-full uppercase tracking-widest">Online</span>
         </nav>
@@ -89,69 +96,52 @@
                     Next-Gen Optimization for BF6
                 </div>
                 <h2 class="text-6xl md:text-8xl font-black mb-8 uppercase italic tracking-tighter text-white leading-[0.9] glow-text">
-                    MAX FPS<br><span class="text-blue-600">ZERO LAG</span>
+                    ВЫБЕРИ СВОЙ<br><span class="text-blue-600">ПУТЬ</span>
                 </h2>
                 <p class="text-lg md:text-xl text-gray-200 font-medium tracking-wide max-w-2xl mx-auto mb-12 drop-shadow-lg">
-                    Профессиональные инструменты настройки для достижения киберспортивной производительности.
+                    От экстремальной производительности до кинематографического качества.
                 </p>
-                <div class="flex flex-wrap justify-center gap-4">
-                    <button onclick="document.getElementById('catalog').scrollIntoView({behavior: 'smooth'})" class="px-10 py-5 bg-white text-black font-black uppercase tracking-widest text-xs rounded-full hover:bg-blue-600 hover:text-white transition-colors">Перейти в каталог</button>
-                    <div class="flex -space-x-3 items-center ml-4">
-                        <img src="https://i.pravatar.cc/100?u=1" class="w-10 h-10 rounded-full border-2 border-[#07080a]" alt="User 1">
-                        <img src="https://i.pravatar.cc/100?u=2" class="w-10 h-10 rounded-full border-2 border-[#07080a]" alt="User 2">
-                        <img src="https://i.pravatar.cc/100?u=3" class="w-10 h-10 rounded-full border-2 border-[#07080a]" alt="User 3">
-                        <span class="pl-6 text-[10px] font-bold text-gray-300 uppercase tracking-widest">500+ установок</span>
-                    </div>
-                </div>
+                <button onclick="document.getElementById('catalog').scrollIntoView({behavior: 'smooth'})" class="px-10 py-5 bg-white text-black font-black uppercase tracking-widest text-xs rounded-full hover:bg-blue-600 hover:text-white transition-colors">Посмотреть каталог</button>
             </div>
         </section>
 
         <main id="catalog" class="max-w-7xl mx-auto py-32 px-6">
             <div class="flex justify-between items-end mb-16">
-                <div>
-                    <h3 class="text-3xl font-black uppercase italic tracking-tighter">Лучшие решения</h3>
-                    <div class="h-1 w-20 bg-blue-600 mt-2"></div>
-                </div>
-                <p class="text-xs text-gray-500 font-bold uppercase tracking-widest hidden md:block">Категория: Performance / Low Latency</p>
+                <h3 class="text-3xl font-black uppercase italic tracking-tighter underline decoration-blue-600 decoration-4">Доступные конфиги</h3>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 
-                <!-- Товар: ZERO_LAG_ULTRA_FPS -->
+                <!-- Товар 1: ZERO_LAG -->
                 <div class="glass-card p-1 rounded-[2.5rem] group cursor-pointer" onclick="showSection('item-zero-lag')">
                     <div class="bg-[#0d1117] p-8 rounded-[2.3rem] h-full flex flex-col">
-                        <div class="h-56 bg-[#161b22] rounded-3xl mb-8 flex items-center justify-center relative overflow-hidden group-hover:scale-[0.98] transition-transform">
-                            <div class="scanline opacity-0 group-hover:opacity-100"></div>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24 text-blue-600 opacity-20 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <div class="h-56 bg-blue-600/5 rounded-3xl mb-8 flex items-center justify-center relative overflow-hidden transition-all group-hover:bg-blue-600/10">
+                            <svg class="h-24 w-24 text-blue-600 opacity-40 group-hover:scale-110 transition-transform duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M13 10V3L4 14h7v7l9-11h-7z" />
                             </svg>
-                            <div class="absolute bottom-4 left-4 flex gap-2">
-                                <span class="bg-blue-600 text-white text-[8px] font-black px-2 py-1 rounded">ULTRA</span>
-                                <span class="bg-black/50 text-white text-[8px] font-black px-2 py-1 rounded backdrop-blur">ZIP</span>
-                            </div>
                         </div>
                         <h3 class="text-2xl font-black mb-4 text-white italic tracking-tight uppercase">ZERO_LAG_ULTRA_FPS</h3>
-                        <p class="text-gray-500 text-sm leading-relaxed mb-10 font-medium">Специально разработанный конфиг для критического снижения задержек и разблокировки FPS.</p>
-                        <div class="mt-auto pt-6 border-t border-white/5 flex justify-between items-center">
-                            <span class="text-blue-500 font-black uppercase text-xs tracking-widest">Открыть детали</span>
-                            <div class="w-8 h-8 rounded-full bg-blue-600/10 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"/></svg>
-                            </div>
+                        <p class="text-gray-500 text-sm font-medium mb-10">Приоритет: Производительность. Максимальный FPS и минимальный инпут-лаг.</p>
+                        <div class="mt-auto pt-6 border-t border-white/5">
+                            <span class="text-blue-500 font-black uppercase text-xs tracking-widest">Выбрать этот путь</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Заглушки -->
-                <div class="glass-card p-1 rounded-[2.5rem] opacity-40 grayscale cursor-not-allowed hidden md:block">
-                    <div class="bg-[#0d1117] p-8 rounded-[2.3rem] h-full flex flex-col items-center justify-center text-center">
-                        <div class="w-16 h-16 border-2 border-dashed border-gray-700 rounded-full mb-4"></div>
-                        <h4 class="text-xs font-black uppercase tracking-[0.3em] text-gray-600">Coming Soon</h4>
-                    </div>
-                </div>
-                <div class="glass-card p-1 rounded-[2.5rem] opacity-40 grayscale cursor-not-allowed hidden lg:block">
-                    <div class="bg-[#0d1117] p-8 rounded-[2.3rem] h-full flex flex-col items-center justify-center text-center">
-                        <div class="w-16 h-16 border-2 border-dashed border-gray-700 rounded-full mb-4"></div>
-                        <h4 class="text-xs font-black uppercase tracking-[0.3em] text-gray-600">Coming Soon</h4>
+                <!-- Товар 2: FROSTBITE ZENITH -->
+                <div class="glass-card p-1 rounded-[2.5rem] group cursor-pointer border-purple-500/20 hover:border-purple-500" onclick="showSection('item-zenith')">
+                    <div class="bg-[#0d1117] p-8 rounded-[2.3rem] h-full flex flex-col">
+                        <div class="h-56 bg-purple-600/5 rounded-3xl mb-8 flex items-center justify-center relative overflow-hidden transition-all group-hover:bg-purple-600/10">
+                            <svg class="h-24 w-24 text-purple-600 opacity-40 group-hover:scale-110 transition-transform duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-black mb-4 text-white italic tracking-tight uppercase">Frostbite Zenith</h3>
+                        <p class="text-gray-500 text-sm font-medium mb-10">Приоритет: Визуал. Кристальная четкость и технический манифест эстетики.</p>
+                        <div class="mt-auto pt-6 border-t border-white/5">
+                            <span class="text-purple-500 font-black uppercase text-xs tracking-widest">Выбрать этот путь</span>
+                        </div>
                     </div>
                 </div>
 
@@ -159,138 +149,104 @@
         </main>
     </div>
 
-    <!-- СТРАНИЦА ТОВАРА -->
+    <!-- СТРАНИЦА: ZERO_LAG -->
     <div id="section-item-zero-lag" class="hidden-section max-w-7xl mx-auto py-12 md:py-24 px-6">
         <button onclick="showSection('main')" class="text-gray-500 mb-12 flex items-center hover:text-white transition font-black uppercase text-[10px] tracking-[0.3em]">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M15 19l-7-7 7-7"/></svg>
-            Вернуться в каталог
+            Назад в каталог
         </button>
-        
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
-            <!-- Левая колонка - Контент -->
-            <div class="lg:col-span-8 space-y-8">
-                <div class="glass-card p-8 md:p-16 rounded-[3rem] relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-64 h-64 bg-blue-600/10 blur-[100px] -mr-32 -mt-32"></div>
-                    
-                    <div class="flex items-center gap-6 mb-10">
-                        <div class="w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-900/40">
-                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                        </div>
-                        <div>
-                            <h2 class="text-4xl md:text-6xl font-black uppercase italic text-white tracking-tighter leading-none glow-text">ZERO_LAG<br>ULTRA_FPS</h2>
-                        </div>
-                    </div>
-                    
-                    <p class="text-gray-400 text-lg md:text-xl leading-relaxed mb-12 font-medium">
-                        Комплексное решение для оптимизации Battlefield 6. Мы переработали систему обработки потоков и визуальных эффектов, чтобы дать вам максимальную плавность в самых жарких боях.
-                    </p>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-                        <div class="p-6 bg-white/5 rounded-3xl border border-white/5">
-                            <div class="text-blue-500 font-black text-2xl mb-1">+40%</div>
-                            <div class="text-[10px] font-bold uppercase tracking-widest text-gray-500">Прирост FPS</div>
-                        </div>
-                        <div class="p-6 bg-white/5 rounded-3xl border border-white/5">
-                            <div class="text-blue-500 font-black text-2xl mb-1">-15ms</div>
-                            <div class="text-[10px] font-bold uppercase tracking-widest text-gray-500">Input Lag</div>
-                        </div>
-                        <div class="p-6 bg-white/5 rounded-3xl border border-white/5">
-                            <div class="text-blue-500 font-black text-2xl mb-1">STABLE</div>
-                            <div class="text-[10px] font-bold uppercase tracking-widest text-gray-500">Frame Time</div>
-                        </div>
-                    </div>
-
-                    <a href="ZERO_LAG_ULTRA_FPS.zip" download class="group relative block w-full bg-blue-600 hover:bg-blue-500 text-white font-black py-8 rounded-[2rem] transition-all shadow-2xl shadow-blue-900/40 text-center uppercase tracking-[0.4em] text-xl overflow-hidden">
-                        <span class="relative z-10">СКАЧАТЬ АРХИВ (.ZIP)</span>
-                        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-                    </a>
-                    
-                    <p class="text-center mt-6 text-gray-600 text-[10px] font-bold uppercase tracking-widest">Размер: 4.2 KB | Версия: 4.0 Stable</p>
+            <div class="lg:col-span-7">
+                <div class="glass-card p-12 rounded-[3rem] mb-8">
+                    <h2 class="text-5xl font-black uppercase italic text-white mb-6 glow-text">ZERO_LAG<br>ULTRA_FPS</h2>
+                    <p class="text-gray-400 text-lg mb-10 leading-relaxed">Экстремальная оптимизация для слабых и средних ПК. Убирает все лишнее, оставляя только чистый геймплей и высокую отзывчивость.</p>
+                    <a href="ZERO_LAG_ULTRA_FPS.zip" download class="block w-full bg-blue-600 text-center py-6 rounded-2xl font-black uppercase tracking-[0.3em] text-white shadow-xl shadow-blue-900/40 hover:bg-blue-500 transition-all">СКАЧАТЬ (.ZIP)</a>
                 </div>
-
-                <!-- Блок характеристик -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="glass-card p-10 rounded-[2.5rem]">
-                        <h4 class="text-blue-500 font-black text-xs uppercase tracking-[0.3em] mb-6">Оптимизация CPU</h4>
-                        <ul class="space-y-4 text-sm font-medium text-gray-400">
-                            <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-blue-600 rounded-full"></span> Распределение на 8+ потоков</li>
-                            <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-blue-600 rounded-full"></span> Приоритезация JobThread</li>
-                            <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-blue-600 rounded-full"></span> Устранение микро-фризов</li>
-                        </ul>
+                <div class="grid grid-cols-2 gap-6">
+                    <div class="glass-card p-6 rounded-3xl">
+                        <div class="text-blue-500 font-black text-2xl">+45 FPS</div>
+                        <div class="text-[10px] text-gray-500 font-black uppercase">Прирост</div>
                     </div>
-                    <div class="glass-card p-10 rounded-[2.5rem]">
-                        <h4 class="text-blue-500 font-black text-xs uppercase tracking-[0.3em] mb-6">Визуальная часть</h4>
-                        <ul class="space-y-4 text-sm font-medium text-gray-400">
-                            <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-blue-600 rounded-full"></span> Clean Competitive Look</li>
-                            <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-blue-600 rounded-full"></span> No Blur / No Fog</li>
-                            <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-blue-600 rounded-full"></span> Оптимизация теней</li>
-                        </ul>
+                    <div class="glass-card p-6 rounded-3xl">
+                        <div class="text-blue-500 font-black text-2xl">LOW</div>
+                        <div class="text-[10px] text-gray-500 font-black uppercase">Задержка</div>
                     </div>
                 </div>
             </div>
-
-            <!-- Правая колонка - Инструкция -->
-            <div class="lg:col-span-4">
-                <div class="sticky top-32 bg-[#0d1117] p-10 rounded-[3rem] border border-white/5 space-y-12">
-                    <h3 class="text-sm font-black text-white uppercase tracking-[0.5em] flex items-center gap-4">
-                        <div class="w-2 h-8 bg-blue-600"></div>
-                        Установка
-                    </h3>
-                    
-                    <div class="space-y-12">
-                        <div class="flex gap-8 relative">
-                            <div class="absolute left-4 top-10 w-[2px] h-12 bg-white/5"></div>
-                            <div class="step-number">1</div>
-                            <div>
-                                <h5 class="text-white font-black text-[11px] uppercase tracking-widest mb-2">Загрузка</h5>
-                                <p class="text-[12px] text-gray-500 leading-relaxed">Скачайте архив и распакуйте содержимое в удобное место.</p>
-                            </div>
-                        </div>
-                        <div class="flex gap-8 relative">
-                            <div class="absolute left-4 top-10 w-[2px] h-12 bg-white/5"></div>
-                            <div class="step-number">2</div>
-                            <div>
-                                <h5 class="text-white font-black text-[11px] uppercase tracking-widest mb-2">Перенос файла</h5>
-                                <p class="text-[12px] text-gray-500 leading-relaxed italic">Скопируйте <span class="text-blue-400">user.cfg</span> в корень папки Battlefield 6.</p>
-                            </div>
-                        </div>
-                        <div class="flex gap-8">
-                            <div class="step-number">3</div>
-                            <div>
-                                <h5 class="text-white font-black text-[11px] uppercase tracking-widest mb-2">Финал</h5>
-                                <p class="text-[12px] text-green-500/80 font-bold uppercase italic tracking-widest">Готово! Наслаждайтесь игрой.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="p-6 bg-blue-600/5 border border-blue-500/10 rounded-3xl mt-12">
-                        <p class="text-[10px] text-blue-400/80 leading-relaxed font-bold uppercase tracking-widest">
-                            Совет: Рекомендуется сделать бэкап ваших настроек перед заменой.
-                        </p>
+            <div class="lg:col-span-5">
+                <div class="bg-[#0d1117] p-10 rounded-[3rem] border border-white/5 h-full">
+                    <h4 class="font-black uppercase tracking-widest text-sm mb-8 text-white italic">Инструкция</h4>
+                    <div class="space-y-8 text-sm">
+                        <div class="flex gap-4"><span class="step-number">1</span><p class="text-gray-400 font-medium">Распакуйте архив</p></div>
+                        <div class="flex gap-4"><span class="step-number">2</span><p class="text-gray-400 font-medium">Поместите user.cfg в корень игры</p></div>
+                        <div class="flex gap-4"><span class="step-number">3</span><p class="text-gray-400 font-medium">Запускайте и играйте</p></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- СТРАНИЦА: FROSTBITE ZENITH -->
+    <div id="section-item-zenith" class="hidden-section max-w-7xl mx-auto py-12 md:py-24 px-6">
+        <button onclick="showSection('main')" class="text-gray-500 mb-12 flex items-center hover:text-white transition font-black uppercase text-[10px] tracking-[0.3em]">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M15 19l-7-7 7-7"/></svg>
+            Назад в каталог
+        </button>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+            <div class="lg:col-span-7">
+                <div class="glass-card p-12 rounded-[3rem] border-purple-500/30 mb-8">
+                    <div class="inline-block px-3 py-1 bg-purple-500/10 text-purple-500 text-[10px] font-black uppercase tracking-widest rounded-full mb-6 italic">The Visual Masterpiece</div>
+                    <h2 class="text-5xl font-black uppercase italic text-white mb-6 glow-text-purple">Frostbite<br>Zenith</h2>
+                    <p class="text-gray-400 text-lg mb-10 leading-relaxed">Забудьте о мыльных текстурах и визуальном шуме. Frostbite Zenith — это технический манифест. Мы переписали логику рендеринга, чтобы выжать максимум эстетики: глубокие тени, кристальная четкость и безупречная плавность.</p>
+                    <a href="Frostbite_Zenith.zip" download class="block w-full btn-purple text-center py-6 rounded-2xl font-black uppercase tracking-[0.3em] text-white shadow-xl shadow-purple-900/40 transition-all">СКАЧАТЬ ZENITH (.ZIP)</a>
+                </div>
+                <div class="grid grid-cols-2 gap-6">
+                    <div class="glass-card p-6 rounded-3xl border-purple-500/10">
+                        <div class="text-purple-500 font-black text-2xl">4K NATIVE</div>
+                        <div class="text-[10px] text-gray-500 font-black uppercase">Visual Fidelity</div>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl border-purple-500/10">
+                        <div class="text-purple-500 font-black text-2xl">ULTRA+</div>
+                        <div class="text-[10px] text-gray-500 font-black uppercase">Shadow Logic</div>
+                    </div>
+                </div>
+            </div>
+            <div class="lg:col-span-5">
+                <div class="bg-[#0d1117] p-10 rounded-[3rem] border border-purple-500/10 h-full">
+                    <h4 class="font-black uppercase tracking-widest text-sm mb-8 text-purple-500 italic">Особенности</h4>
+                    <ul class="space-y-6">
+                        <li class="flex items-start gap-4">
+                            <div class="w-1.5 h-1.5 bg-purple-500 rounded-full mt-2"></div>
+                            <div>
+                                <h6 class="text-white font-black uppercase text-[10px] tracking-widest">Максимальная фильтрация</h6>
+                                <p class="text-gray-500 text-xs">Принудительная анизотропная фильтрация 16x для четких текстур на дистанции.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-1.5 h-1.5 bg-purple-500 rounded-full mt-2"></div>
+                            <div>
+                                <h6 class="text-white font-black uppercase text-[10px] tracking-widest">Умные тени</h6>
+                                <p class="text-gray-500 text-xs">Увеличено разрешение Shadow Maps до 4096 для избавления от "лесенок".</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="w-1.5 h-1.5 bg-purple-500 rounded-full mt-2"></div>
+                            <div>
+                                <h6 class="text-white font-black uppercase text-[10px] tracking-widest">Кинематографичность</h6>
+                                <p class="text-gray-500 text-xs">Оптимизированный Frame Pacing для идеальной плавности картинки.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- ФУТЕР -->
-    <footer class="border-t border-white/5 py-24 mt-32 bg-[#0d1117]">
-        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-16">
-            <div class="space-y-6 text-center md:text-left">
-                <h1 class="text-2xl font-black italic tracking-tighter uppercase">BF6<span class="text-blue-500">STORE</span></h1>
-                <p class="text-xs text-gray-500 font-medium leading-relaxed uppercase tracking-widest">
-                    Лучшее сообщество по оптимизации Battlefield в СНГ.
-                </p>
-            </div>
-            <div class="text-center">
-                <p class="text-[10px] font-black uppercase tracking-[0.5em] text-white mb-6">Разработчик</p>
-                <p class="text-blue-500 font-black italic text-xl">YUSIKYT</p>
-            </div>
-            <div class="text-center md:text-right">
-                <p class="text-[10px] font-black uppercase tracking-[0.3em] text-gray-600">
-                    © 2026 Все права защищены.<br>Не является официальным продуктом EA/DICE.
-                </p>
-            </div>
+    <footer class="border-t border-white/5 py-12 mt-32">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
+            <h1 class="text-xl font-black italic tracking-tighter uppercase">CFG ДЛЯ <span class="text-blue-500">BF6</span></h1>
+            <p class="text-[10px] font-black uppercase tracking-widest text-gray-600">© 2026 Developed by YUSIKYT</p>
         </div>
     </footer>
 
