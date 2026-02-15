@@ -8,37 +8,46 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
 
+        :root {
+            --bg-deep: #050608;
+            --accent-blue: #3b82f6;
+            --accent-purple: #a855f7;
+        }
+
         body { 
-            background-color: #050608; 
+            background-color: var(--bg-deep); 
             color: #e5e7eb; 
             font-family: 'Inter', sans-serif; 
             overflow-x: hidden;
             scroll-behavior: smooth;
+            margin: 0;
         }
 
-        /* Плавный параллакс для фона */
+        /* Оптимизированный фон для GitHub */
         .hero-bg {
-            background-color: #050608;
+            background-color: var(--bg-deep);
             background-image: 
-                radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.15), transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(124, 58, 237, 0.15), transparent 40%),
+                radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.12), transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(124, 58, 237, 0.12), transparent 40%),
                 linear-gradient(to bottom, rgba(5, 6, 8, 0.4), rgba(5, 6, 8, 1)),
                 url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            transition: background-position 0.1s ease-out;
+            transition: background-position 0.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         /* Ультра-плавная карточка */
         .glass-card { 
-            background: rgba(13, 17, 23, 0.6); 
-            backdrop-filter: blur(15px);
+            background: rgba(13, 17, 23, 0.7); 
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.05); 
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
             opacity: 0;
-            transform: translateY(40px) scale(0.95);
-            filter: blur(10px);
+            transform: translateY(30px) scale(0.98);
+            filter: blur(5px);
+            will-change: transform, opacity;
         }
 
         .glass-card.visible {
@@ -48,166 +57,154 @@
         }
 
         .glass-card:hover { 
-            border-color: rgba(59, 130, 246, 0.5); 
-            transform: translateY(-15px) scale(1.03);
-            background: rgba(20, 26, 35, 0.8);
-            box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.8), 0 0 20px rgba(59, 130, 246, 0.1);
+            border-color: rgba(59, 130, 246, 0.4); 
+            transform: translateY(-10px) scale(1.02);
+            background: rgba(20, 26, 35, 0.9);
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.5), 0 0 20px rgba(59, 130, 246, 0.1);
         }
 
-        .hidden-section { display: none; }
+        .hidden-section { 
+            display: none !important; 
+        }
 
         .step-number {
-            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            background: linear-gradient(135deg, var(--accent-blue), #2563eb);
             color: white;
-            min-width: 40px;
-            height: 40px;
+            min-width: 42px;
+            height: 42px;
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 16px;
             font-weight: 900;
-            box-shadow: 0 8px 16px rgba(59, 130, 246, 0.3);
-            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 16px rgba(59, 130, 246, 0.2);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .glow-text {
-            text-shadow: 0 0 40px rgba(59, 130, 246, 0.5);
+            text-shadow: 0 0 30px rgba(59, 130, 246, 0.4);
         }
 
         .glow-text-purple {
-            text-shadow: 0 0 40px rgba(168, 85, 247, 0.5);
+            text-shadow: 0 0 30px rgba(168, 85, 247, 0.4);
         }
 
-        /* Мягкая кнопка */
+        /* Кнопка с мягким эффектом */
         .btn-main {
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
             overflow: hidden;
+            z-index: 1;
         }
 
         .btn-main:hover {
-            transform: scale(1.05);
-            box-shadow: 0 15px 30px rgba(59, 130, 246, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.25);
         }
 
         .btn-main::after {
             content: '';
             position: absolute;
-            top: -50%; left: -50%;
-            width: 200%; height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.5s;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.6s ease;
+            z-index: -1;
         }
 
         .btn-main:hover::after {
-            opacity: 1;
+            left: 100%;
         }
 
         /* Плавное появление страниц */
         .section-transition {
-            animation: softFadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: softFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         @keyframes softFadeIn {
-            from { opacity: 0; transform: translateY(30px); filter: blur(15px); }
+            from { opacity: 0; transform: translateY(20px); filter: blur(10px); }
             to { opacity: 1; transform: translateY(0); filter: blur(0); }
         }
 
-        /* Кастомный скроллбар */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #050608; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-deep); }
         ::-webkit-scrollbar-thumb { background: #1f2937; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #3b82f6; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent-blue); }
     </style>
 </head>
 <body>
 
     <!-- Навигация -->
-    <header class="p-6 md:px-12 flex justify-between items-center border-b border-white/5 bg-[#050608]/60 backdrop-blur-2xl sticky top-0 z-50">
+    <header class="p-6 md:px-12 flex justify-between items-center border-b border-white/5 bg-[#050608]/80 backdrop-blur-xl sticky top-0 z-50">
         <div onclick="showSection('main')" class="flex items-center gap-3 cursor-pointer group">
-            <div class="w-11 h-11 bg-blue-600 rounded-xl flex items-center justify-center font-black italic text-xl group-hover:rotate-[360deg] transition-transform duration-1000 shadow-lg shadow-blue-600/20">C</div>
-            <h1 class="text-xl font-black tracking-tighter uppercase italic">
+            <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center font-black italic text-lg group-hover:rotate-12 transition-transform duration-500 shadow-lg shadow-blue-600/20">C</div>
+            <h1 class="text-lg font-black tracking-tighter uppercase italic">
                 CFG ДЛЯ <span class="text-blue-500">BF6</span>
             </h1>
         </div>
-        <nav class="hidden md:flex gap-10 items-center">
-            <a href="#" onclick="showSection('main')" class="text-[11px] font-bold uppercase tracking-[0.25em] text-gray-400 hover:text-white transition-all duration-500">Каталог</a>
-            <div class="h-4 w-[1px] bg-white/10"></div>
-            <span class="flex items-center gap-2 text-[10px] font-black text-blue-500 bg-blue-500/5 border border-blue-500/20 px-4 py-1.5 rounded-full uppercase tracking-widest">
-                <span class="w-1.5 h-1.5 bg-blue-500 rounded-full animate-ping"></span>
-                System Online
+        <nav class="hidden md:flex gap-8 items-center">
+            <a href="#" onclick="showSection('main')" class="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 hover:text-white transition-colors">Каталог</a>
+            <span class="flex items-center gap-2 text-[10px] font-black text-blue-500 bg-blue-500/5 border border-blue-500/10 px-4 py-1.5 rounded-full uppercase tracking-widest">
+                <span class="w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse"></span>
+                GitHub Live
             </span>
         </nav>
     </header>
 
     <!-- ГЛАВНАЯ СТРАНИЦА -->
     <div id="section-main">
-        <section class="hero-bg py-48 md:py-72 px-4 text-center relative">
-            <div class="max-w-5xl mx-auto relative z-10 section-transition">
-                <div class="inline-block px-5 py-1.5 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-500 text-[10px] font-black uppercase tracking-[0.4em] mb-10">
-                    Maximum Combat Efficiency
+        <section class="hero-bg py-32 md:py-56 px-4 text-center">
+            <div class="max-w-5xl mx-auto section-transition">
+                <div class="inline-block px-4 py-1 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-500 text-[10px] font-black uppercase tracking-[0.3em] mb-8">
+                    Battlefield 6 Optimization
                 </div>
-                <h2 class="text-7xl md:text-9xl font-black mb-10 uppercase italic tracking-tighter text-white leading-[0.85] glow-text">
+                <h2 class="text-6xl md:text-8xl font-black mb-8 uppercase italic tracking-tighter text-white leading-tight glow-text">
                     ПОЛНЫЙ<br><span class="text-blue-600">КОНТРОЛЬ</span>
                 </h2>
-                <p class="text-xl md:text-2xl text-gray-300 font-medium tracking-wide max-w-2xl mx-auto mb-16 opacity-80 leading-relaxed">
-                    Профессиональные инструменты оптимизации для Battlefield 6.
+                <p class="text-lg md:text-xl text-gray-400 font-medium max-w-xl mx-auto mb-12 opacity-90 leading-relaxed">
+                    Профессиональные конфиги, проверенные временем. Забудь о лагах.
                 </p>
-                <button onclick="document.getElementById('catalog').scrollIntoView({behavior: 'smooth'})" class="btn-main px-12 py-6 bg-white text-black font-black uppercase tracking-[0.2em] text-[11px] rounded-full hover:bg-blue-600 hover:text-white">
-                    Изучить Арсенал
+                <button onclick="document.getElementById('catalog').scrollIntoView({behavior: 'smooth'})" class="btn-main px-10 py-5 bg-white text-black font-black uppercase tracking-[0.15em] text-[10px] rounded-full">
+                    Открыть Каталог
                 </button>
             </div>
         </section>
 
-        <main id="catalog" class="max-w-7xl mx-auto py-32 px-6">
-            <div class="mb-20 text-center">
-                <h3 class="text-4xl font-black uppercase italic tracking-tighter inline-block relative">
-                    Доступные решения
-                    <div class="h-1 w-full bg-blue-600 absolute -bottom-4 left-0 rounded-full"></div>
-                </h3>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+        <main id="catalog" class="max-w-7xl mx-auto py-24 px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
                 
                 <!-- Товар 1 -->
-                <div class="glass-card p-1 rounded-[3rem] group cursor-pointer" onclick="showSection('item-zero-lag')">
-                    <div class="bg-[#0b0e14]/50 p-10 rounded-[2.9rem] h-full flex flex-col">
-                        <div class="h-72 bg-gradient-to-br from-blue-600/10 to-transparent rounded-[2rem] mb-10 flex items-center justify-center relative overflow-hidden">
-                            <svg class="h-32 w-32 text-blue-600 opacity-30 group-hover:scale-125 group-hover:rotate-12 transition-all duration-1000 ease-out" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="0.8" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                <div class="glass-card p-1 rounded-[2.5rem] group cursor-pointer" onclick="showSection('item-zero-lag')">
+                    <div class="bg-[#0b0e14]/40 p-10 rounded-[2.4rem] h-full flex flex-col">
+                        <div class="h-64 bg-gradient-to-br from-blue-600/10 to-transparent rounded-[1.5rem] mb-8 flex items-center justify-center relative overflow-hidden">
+                            <svg class="h-24 w-24 text-blue-600 opacity-20 group-hover:scale-110 transition-transform duration-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M13 10V3L4 14h7v7l9-11h-7z" />
                             </svg>
-                            <div class="absolute inset-0 bg-blue-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
                         </div>
-                        <h3 class="text-3xl font-black mb-6 text-white italic tracking-tight uppercase">ZERO_LAG_ULTRA</h3>
-                        <p class="text-gray-400 text-base font-medium mb-12 leading-relaxed">Экстремальный FPS. Минимальная задержка. Никакого визуального мусора. Только победа.</p>
-                        <div class="mt-auto pt-8 border-t border-white/5 flex justify-between items-center">
-                            <span class="text-blue-500 font-black uppercase text-[10px] tracking-[0.3em]">Выбрать Конфиг</span>
-                            <div class="w-10 h-10 rounded-full border border-blue-500/20 flex items-center justify-center group-hover:bg-blue-500 group-hover:text-white transition-all duration-500">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                            </div>
+                        <h3 class="text-2xl font-black mb-4 text-white italic uppercase">ZERO_LAG_ULTRA</h3>
+                        <p class="text-gray-500 text-sm mb-10 leading-relaxed">Максимальный приоритет FPS. Оптимально для соревновательной игры.</p>
+                        <div class="mt-auto flex justify-between items-center text-blue-500 font-bold text-[10px] uppercase tracking-widest">
+                            <span>Подробнее</span>
+                            <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
                         </div>
                     </div>
                 </div>
 
                 <!-- Товар 2 -->
-                <div class="glass-card p-1 rounded-[3rem] group cursor-pointer" onclick="showSection('item-zenith')">
-                    <div class="bg-[#0b0e14]/50 p-10 rounded-[2.9rem] h-full flex flex-col">
-                        <div class="h-72 bg-gradient-to-br from-purple-600/10 to-transparent rounded-[2rem] mb-10 flex items-center justify-center relative overflow-hidden">
-                            <svg class="h-32 w-32 text-purple-600 opacity-30 group-hover:scale-125 group-hover:-rotate-12 transition-all duration-1000 ease-out" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="0.8" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="0.8" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                <div class="glass-card p-1 rounded-[2.5rem] group cursor-pointer" onclick="showSection('item-zenith')">
+                    <div class="bg-[#0b0e14]/40 p-10 rounded-[2.4rem] h-full flex flex-col">
+                        <div class="h-64 bg-gradient-to-br from-purple-600/10 to-transparent rounded-[1.5rem] mb-8 flex items-center justify-center relative overflow-hidden">
+                            <svg class="h-24 w-24 text-purple-600 opacity-20 group-hover:scale-110 transition-transform duration-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                             </svg>
-                            <div class="absolute inset-0 bg-purple-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
                         </div>
-                        <h3 class="text-3xl font-black mb-6 text-white italic tracking-tight uppercase text-purple-100">Frostbite Zenith</h3>
-                        <p class="text-gray-400 text-base font-medium mb-12 leading-relaxed">Кинематографический рендеринг. Умная резкость и работа со светом для лучшей видимости.</p>
-                        <div class="mt-auto pt-8 border-t border-white/5 flex justify-between items-center">
-                            <span class="text-purple-500 font-black uppercase text-[10px] tracking-[0.3em]">Выбрать Конфиг</span>
-                            <div class="w-10 h-10 rounded-full border border-purple-500/20 flex items-center justify-center group-hover:bg-purple-500 group-hover:text-white transition-all duration-500">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                            </div>
+                        <h3 class="text-2xl font-black mb-4 text-white italic uppercase">Frostbite Zenith</h3>
+                        <p class="text-gray-500 text-sm mb-10 leading-relaxed">Баланс качества и скорости. Улучшенная четкость изображения.</p>
+                        <div class="mt-auto flex justify-between items-center text-purple-500 font-bold text-[10px] uppercase tracking-widest">
+                            <span>Подробнее</span>
+                            <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
                         </div>
                     </div>
                 </div>
@@ -216,146 +213,116 @@
         </main>
     </div>
 
-    <!-- ДЕТАЛЬНАЯ СЕКЦИЯ (ZERO_LAG) -->
-    <div id="section-item-zero-lag" class="hidden-section max-w-7xl mx-auto py-24 px-6 section-transition">
-        <button onclick="showSection('main')" class="text-gray-500 mb-12 flex items-center hover:text-white transition-all font-black uppercase text-[11px] tracking-[0.4em] group">
-            <svg class="w-5 h-5 mr-3 transform group-hover:-translate-x-2 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M15 19l-7-7 7-7"/></svg>
-            Вернуться назад
+    <!-- ДЕТАЛЬНАЯ СЕКЦИЯ -->
+    <div id="section-item-zero-lag" class="hidden-section max-w-5xl mx-auto py-20 px-6">
+        <button onclick="showSection('main')" class="text-gray-500 mb-10 flex items-center hover:text-white transition-colors font-bold uppercase text-[10px] tracking-widest group">
+            <svg class="w-4 h-4 mr-2 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+            Назад
         </button>
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
-            <div class="lg:col-span-7">
-                <div class="glass-card visible p-12 rounded-[3.5rem] mb-10">
-                    <h2 class="text-6xl font-black uppercase italic text-white mb-8 glow-text">ZERO_LAG<br><span class="text-blue-600">ULTRA_FPS</span></h2>
-                    <p class="text-gray-400 text-xl mb-12 leading-relaxed font-medium">Тщательно настроенный файл конфигурации, который отключает избыточные пост-эффекты и оптимизирует использование процессора.</p>
-                    <a href="ZERO_LAG_ULTRA_FPS.zip" download class="btn-main block w-full bg-blue-600 text-center py-7 rounded-2xl font-black uppercase tracking-[0.4em] text-[12px] text-white shadow-2xl shadow-blue-900/30">
-                        ЗАГРУЗИТЬ АРХИВ
-                    </a>
-                </div>
-                <div class="grid grid-cols-2 gap-8">
-                    <div class="glass-card visible p-8 rounded-[2.5rem]">
-                        <div class="text-blue-500 font-black text-4xl mb-2">+45%</div>
-                        <div class="text-[10px] text-gray-500 font-black uppercase tracking-widest">Efficiency</div>
-                    </div>
-                    <div class="glass-card visible p-8 rounded-[2.5rem]">
-                        <div class="text-blue-500 font-black text-4xl mb-2">1.2ms</div>
-                        <div class="text-[10px] text-gray-500 font-black uppercase tracking-widest">Latence Reduc</div>
-                    </div>
-                </div>
+        <div class="section-transition">
+            <div class="glass-card visible p-10 md:p-16 rounded-[3rem] mb-12">
+                <h2 class="text-5xl font-black uppercase italic text-white mb-6 glow-text">ZERO_LAG<br><span class="text-blue-600">ULTRA</span></h2>
+                <p class="text-gray-400 text-lg mb-10 max-w-2xl">Максимальная оптимизация для слабых и средних систем. Повышает стабильность кадра и убирает микро-фризы.</p>
+                <a href="ZERO_LAG_ULTRA_FPS.zip" download class="btn-main block w-full bg-blue-600 text-center py-6 rounded-2xl font-black uppercase tracking-widest text-[11px] text-white">
+                    СКАЧАТЬ АРХИВ (.ZIP)
+                </a>
             </div>
-            <div class="lg:col-span-5">
-                <div class="bg-[#0b0e14] p-12 rounded-[3.5rem] border border-white/5 h-full relative overflow-hidden group">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-blue-600/5 rounded-full blur-3xl group-hover:bg-blue-600/10 transition-colors duration-1000"></div>
-                    <h4 class="font-black uppercase tracking-widest text-sm mb-12 text-white italic border-l-4 border-blue-600 pl-4">Процесс установки</h4>
-                    <div class="space-y-12">
-                        <div class="flex gap-6 group/step">
-                            <span class="step-number group-hover/step:rotate-12">1</span>
-                            <div>
-                                <h5 class="text-white font-black uppercase text-xs mb-1">Распаковка</h5>
-                                <p class="text-gray-500 text-sm leading-relaxed">Извлеките user.cfg из загруженного архива.</p>
-                            </div>
-                        </div>
-                        <div class="flex gap-6 group/step">
-                            <span class="step-number group-hover/step:rotate-12">2</span>
-                            <div>
-                                <h5 class="text-white font-black uppercase text-xs mb-1">Трансфер</h5>
-                                <p class="text-gray-500 text-sm leading-relaxed">Поместите файл в корневой каталог игры.</p>
-                            </div>
-                        </div>
-                        <div class="flex gap-6 group/step">
-                            <span class="step-number group-hover/step:rotate-12">3</span>
-                            <div>
-                                <h5 class="text-white font-black uppercase text-xs mb-1">Запуск</h5>
-                                <p class="text-gray-500 text-sm leading-relaxed">Настройки применятся автоматически.</p>
-                            </div>
-                        </div>
-                    </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white/5 p-8 rounded-3xl border border-white/5">
+                    <div class="text-blue-500 font-black text-2xl mb-1">1. Распаковать</div>
+                    <p class="text-gray-500 text-xs uppercase font-bold tracking-tighter">В папку с игрой</p>
+                </div>
+                <div class="bg-white/5 p-8 rounded-3xl border border-white/5">
+                    <div class="text-blue-500 font-black text-2xl mb-1">2. Заменить</div>
+                    <p class="text-gray-500 text-xs uppercase font-bold tracking-tighter">Существующий user.cfg</p>
+                </div>
+                <div class="bg-white/5 p-8 rounded-3xl border border-white/5">
+                    <div class="text-blue-500 font-black text-2xl mb-1">3. Играть</div>
+                    <p class="text-gray-500 text-xs uppercase font-bold tracking-tighter">Наслаждайтесь FPS</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- СЕКЦИЯ ZENITH (АНАЛОГИЧНО) -->
-    <div id="section-item-zenith" class="hidden-section max-w-7xl mx-auto py-24 px-6 section-transition">
-        <button onclick="showSection('main')" class="text-gray-500 mb-12 flex items-center hover:text-white transition-all font-black uppercase text-[11px] tracking-[0.4em] group">
-            <svg class="w-5 h-5 mr-3 transform group-hover:-translate-x-2 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M15 19l-7-7 7-7"/></svg>
-            Вернуться назад
+    <!-- СЕКЦИЯ ZENITH -->
+    <div id="section-item-zenith" class="hidden-section max-w-5xl mx-auto py-20 px-6">
+        <button onclick="showSection('main')" class="text-gray-500 mb-10 flex items-center hover:text-white transition-colors font-bold uppercase text-[10px] tracking-widest group">
+            <svg class="w-4 h-4 mr-2 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+            Назад
         </button>
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
-            <div class="lg:col-span-7">
-                <div class="glass-card visible p-12 rounded-[3.5rem] border-purple-500/20 mb-10">
-                    <h2 class="text-6xl font-black uppercase italic text-white mb-8 glow-text-purple">Frostbite<br><span class="text-purple-600">Zenith</span></h2>
-                    <p class="text-gray-400 text-xl mb-12 leading-relaxed font-medium">Конфигурация для тех, кто не готов жертвовать красотой. Убирает "мыло", улучшает прорисовку и делает картинку сочной.</p>
-                    <a href="Frostbite_Zenith.zip" download class="btn-main block w-full bg-purple-600 text-center py-7 rounded-2xl font-black uppercase tracking-[0.4em] text-[12px] text-white shadow-2xl shadow-purple-900/30">
-                        ЗАГРУЗИТЬ ZENITH
-                    </a>
-                </div>
-                <!-- ... статы аналогично ... -->
-            </div>
-            <div class="lg:col-span-5">
-                <!-- ... описание особенностей аналогично ... -->
+        <div class="section-transition">
+            <div class="glass-card visible p-10 md:p-16 rounded-[3rem] border-purple-500/20 mb-12">
+                <h2 class="text-5xl font-black uppercase italic text-white mb-6 glow-text-purple">Frostbite<br><span class="text-purple-600">Zenith</span></h2>
+                <p class="text-gray-400 text-lg mb-10 max-w-2xl">Для мощных систем. Делает картинку максимально четкой и убирает визуальный шум без потери производительности.</p>
+                <a href="Frostbite_Zenith.zip" download class="btn-main block w-full bg-purple-600 text-center py-6 rounded-2xl font-black uppercase tracking-widest text-[11px] text-white">
+                    СКАЧАТЬ ZENITH (.ZIP)
+                </a>
             </div>
         </div>
     </div>
 
-    <!-- ФУТЕР -->
-    <footer class="border-t border-white/5 py-20 mt-40">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <div class="flex flex-col items-center gap-6">
-                <div class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center font-black italic text-xl border border-white/10">C</div>
-                <h1 class="text-2xl font-black italic tracking-tighter uppercase">CFG ДЛЯ <span class="text-blue-500">BF6</span></h1>
-                <p class="text-[11px] font-black uppercase tracking-[0.5em] text-gray-700">© 2026 Developed by YUSIKYT</p>
-            </div>
-        </div>
+    <footer class="py-20 mt-20 border-t border-white/5 text-center">
+        <p class="text-[10px] font-black uppercase tracking-[0.4em] text-gray-600">© 2026 Developed by YUSIKYT</p>
     </footer>
 
     <script>
-        // Эффект появления при прокрутке
-        const observerOptions = {
-            threshold: 0.15,
-            rootMargin: '0px 0px -50px 0px'
+        // Инициализация при загрузке (важно для GitHub)
+        window.onload = () => {
+            initObserver();
+            // Проверка хеша URL для навигации (опционально)
+            handleHashChange();
         };
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
+        function initObserver() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
 
-        document.querySelectorAll('.glass-card').forEach(card => {
-            observer.observe(card);
-        });
+            document.querySelectorAll('.glass-card').forEach(card => observer.observe(card));
+        }
 
-        // Плавная смена секций
         function showSection(sectionId) {
             const sections = document.querySelectorAll('[id^="section-"]');
             
-            // Сначала плавно скрываем все
-            sections.forEach(section => {
-                section.style.opacity = '0';
-                section.style.filter = 'blur(10px)';
-                setTimeout(() => section.classList.add('hidden-section'), 400);
+            // Плавное скрытие
+            sections.forEach(s => {
+                s.style.opacity = '0';
+                setTimeout(() => s.classList.add('hidden-section'), 300);
             });
 
-            // Показываем нужную через задержку
+            // Плавное появление
             setTimeout(() => {
                 const target = document.getElementById('section-' + sectionId);
                 if (target) {
                     target.classList.remove('hidden-section');
                     target.style.opacity = '1';
-                    target.style.filter = 'blur(0)';
                     window.scrollTo({ top: 0, behavior: 'smooth' });
+                    initObserver(); // Переинициализация для новых видимых элементов
                 }
-            }, 450);
+            }, 350);
         }
 
-        // Легкий параллакс фона
+        function handleHashChange() {
+            const hash = window.location.hash.replace('#', '');
+            if (hash) showSection(hash);
+        }
+
+        // Параллакс с ограничением частоты (Throttle)
+        let ticking = false;
         window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const hero = document.querySelector('.hero-bg');
-            if(hero) {
-                hero.style.backgroundPositionY = -(scrolled * 0.1) + 'px';
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const scrolled = window.pageYOffset;
+                    const hero = document.querySelector('.hero-bg');
+                    if (hero) hero.style.backgroundPositionY = -(scrolled * 0.15) + 'px';
+                    ticking = false;
+                });
+                ticking = true;
             }
         });
     </script>
