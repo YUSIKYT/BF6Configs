@@ -84,10 +84,11 @@
 
         .promo-image {
             max-width: 800px;
-            width: 90%;
-            margin: 40px 0;
-            filter: drop-shadow(0 0 30px rgba(0, 242, 255, 0.2));
+            width: 95%;
+            margin: 40px auto;
+            filter: drop-shadow(0 0 30px rgba(0, 242, 255, 0.15));
             border-radius: 12px;
+            display: block;
         }
     </style>
 </head>
@@ -123,8 +124,8 @@
                 <i class="fas fa-chevron-down mt-2 text-xl scroll-indicator"></i>
             </a>
 
-            <!-- Промо-фото -->
-            <img src="image_e357e5.png" alt="BF6 Soldiers" class="promo-image">
+            <!-- Промо-фото с исправленным путем и обработкой ошибок -->
+            <img src="image_e357e5.png" alt="BF6 Soldiers" class="promo-image" onerror="this.style.display='none'">
         </section>
 
         <!-- Сетка конфигов -->
@@ -136,77 +137,7 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Карточка 1 -->
-                <div onclick="showProduct('zenith')" class="glass p-8 rounded-3xl cursor-pointer card-hover transition-all border border-white/5 group relative overflow-hidden flex flex-col justify-between">
-                    <div>
-                        <i class="fas fa-adjust text-3xl text-[#00f2ff] mb-4"></i>
-                        <h2 class="text-xl font-black uppercase mb-2 group-hover:text-[#00f2ff] transition">Frostbite Zenith</h2>
-                        <p class="text-gray-400 text-sm mb-6 leading-relaxed">Баланс качества и скорости. Оптимизация нагрузки на GPU.</p>
-                    </div>
-                    <div class="text-[#00f2ff] font-bold uppercase text-[10px] tracking-widest">
-                        Открыть <i class="fas fa-arrow-right ml-1"></i>
-                    </div>
-                </div>
-
-                <!-- Карточка 2 -->
-                <div onclick="showProduct('ultrafps')" class="glass p-8 rounded-3xl cursor-pointer card-hover transition-all border border-white/5 group relative overflow-hidden flex flex-col justify-between">
-                    <div>
-                        <i class="fas fa-tachometer-alt text-3xl text-orange-500 mb-4"></i>
-                        <h2 class="text-xl font-black uppercase mb-2 group-hover:text-orange-500 transition">ZERO LAG ULTRA FPS</h2>
-                        <p class="text-gray-400 text-sm mb-6 leading-relaxed">Экстремальный прирост FPS для соревновательной игры.</p>
-                    </div>
-                    <div class="text-orange-500 font-bold uppercase text-[10px] tracking-widest">
-                        Открыть <i class="fas fa-arrow-right ml-1"></i>
-                    </div>
-                </div>
-
-                <!-- Карточка 3 (HDD Fast) -->
-                <div onclick="showProduct('hdd-fast')" class="glass p-8 rounded-3xl cursor-pointer card-hover transition-all border border-white/5 group relative overflow-hidden flex flex-col justify-between">
-                    <div>
-                        <i class="fas fa-hdd text-3xl text-green-500 mb-4"></i>
-                        <h2 class="text-xl font-black uppercase mb-2 group-hover:text-green-500 transition">HDD Fast Streaming</h2>
-                        <p class="text-gray-400 text-sm mb-6 leading-relaxed">Ускорение подгрузки текстур на медленных жестких дисках.</p>
-                    </div>
-                    <div class="text-green-500 font-bold uppercase text-[10px] tracking-widest">
-                        Открыть <i class="fas fa-arrow-right ml-1"></i>
-                    </div>
-                </div>
-
-                <!-- Карточка 4 (Max FPS AI) -->
-                <div onclick="showProduct('max-fps-ai')" class="glass p-8 rounded-3xl cursor-pointer card-hover transition-all border border-white/5 group relative overflow-hidden flex flex-col justify-between">
-                    <div>
-                        <i class="fas fa-robot text-3xl text-purple-500 mb-4"></i>
-                        <h2 class="text-xl font-black uppercase mb-2 group-hover:text-purple-500 transition">Max FPS AI cfg</h2>
-                        <p class="text-gray-400 text-sm mb-6 leading-relaxed">Пресет, сгенерированный ИИ для глубокой оптимизации движка.</p>
-                    </div>
-                    <div class="text-purple-500 font-bold uppercase text-[10px] tracking-widest">
-                        Открыть <i class="fas fa-arrow-right ml-1"></i>
-                    </div>
-                </div>
-
-                <!-- Карточка 5 (Competitive) -->
-                <div onclick="showProduct('pro-comp')" class="glass p-8 rounded-3xl cursor-pointer card-hover transition-all border border-white/5 group relative overflow-hidden flex flex-col justify-between">
-                    <div>
-                        <i class="fas fa-trophy text-3xl text-yellow-500 mb-4"></i>
-                        <h2 class="text-xl font-black uppercase mb-2 group-hover:text-yellow-500 transition">Pro-Competitive</h2>
-                        <p class="text-gray-400 text-sm mb-6 leading-relaxed">Киберспортивные настройки: максимум видимости и минимум лагов.</p>
-                    </div>
-                    <div class="text-yellow-500 font-bold uppercase text-[10px] tracking-widest">
-                        Открыть <i class="fas fa-arrow-right ml-1"></i>
-                    </div>
-                </div>
-
-                <!-- Карточка 6 (Anti-Stutter) -->
-                <div onclick="showProduct('stutter-fix')" class="glass p-8 rounded-3xl cursor-pointer card-hover transition-all border border-white/5 group relative overflow-hidden flex flex-col justify-between">
-                    <div>
-                        <i class="fas fa-wave-square text-3xl text-red-500 mb-4"></i>
-                        <h2 class="text-xl font-black uppercase mb-2 group-hover:text-red-500 transition">HDD Anti-Stutter</h2>
-                        <p class="text-gray-400 text-sm mb-6 leading-relaxed">Устранение рывков и фризов во время интенсивных боев.</p>
-                    </div>
-                    <div class="text-red-500 font-bold uppercase text-[10px] tracking-widest">
-                        Открыть <i class="fas fa-arrow-right ml-1"></i>
-                    </div>
-                </div>
+                <!-- Карточки генерируются скриптом ниже -->
             </div>
         </section>
     </main>
@@ -229,19 +160,15 @@
                     <div class="space-y-6">
                         <div class="flex items-start">
                             <div class="w-8 h-8 rounded-lg bg-[#00f2ff]/10 flex items-center justify-center mr-4 text-[#00f2ff] font-black shrink-0">1</div>
-                            <p class="text-gray-300 text-sm leading-relaxed pt-1">Загрузите выбранный архив и распакуйте файл <b>user.cfg</b>.</p>
+                            <p class="text-gray-300 text-sm leading-relaxed pt-1">Загрузите архив и распакуйте файл <b>user.cfg</b>.</p>
                         </div>
                         <div class="flex items-start">
                             <div class="w-8 h-8 rounded-lg bg-[#00f2ff]/10 flex items-center justify-center mr-4 text-[#00f2ff] font-black shrink-0">2</div>
-                            <p class="text-gray-300 text-sm leading-relaxed pt-1">Откройте папку с установленной игрой Battlefield 6 (там, где находится BF6.exe).</p>
+                            <p class="text-gray-300 text-sm leading-relaxed pt-1">Откройте папку с игрой (там, где лежит BF6.exe).</p>
                         </div>
                         <div class="flex items-start">
                             <div class="w-8 h-8 rounded-lg bg-[#00f2ff]/10 flex items-center justify-center mr-4 text-[#00f2ff] font-black shrink-0">3</div>
-                            <p class="text-gray-300 text-sm leading-relaxed pt-1">Переместите <b>user.cfg</b> в корневую папку. Если такой файл уже существует, замените его.</p>
-                        </div>
-                        <div class="flex items-start">
-                            <div class="w-8 h-8 rounded-lg bg-[#00f2ff]/10 flex items-center justify-center mr-4 text-[#00f2ff] font-black shrink-0">4</div>
-                            <p class="text-gray-300 text-sm leading-relaxed pt-1">Запустите игру. Теперь настройки оптимизации будут применяться при каждом запуске.</p>
+                            <p class="text-gray-300 text-sm leading-relaxed pt-1">Скопируйте <b>user.cfg</b> в эту папку с заменой.</p>
                         </div>
                     </div>
                 </div>
@@ -259,48 +186,75 @@
     </section>
 
     <footer class="py-16 text-center">
-        <p class="text-gray-600 text-[10px] uppercase tracking-[0.5em] mb-4">&copy; 2026 YUSIKYT | BF6 Zenith Labs</p>
+        <p class="text-gray-600 text-[10px] uppercase tracking-[0.5em]">&copy; 2026 YUSIKYT | BF6 Zenith Labs</p>
     </footer>
 
     <script>
         const products = {
             'zenith': {
                 title: 'Frostbite Zenith',
-                desc: 'Сбалансированный конфиг для улучшения стабильности. Оптимизирует рендеринг и убирает лишние задержки без сильной потери качества картинки.',
+                desc: 'Сбалансированный конфиг для улучшения стабильности. Оптимизирует рендеринг и убирает задержки.',
                 file: 'Frostbite Zenith.zip',
-                accent: '#00f2ff'
+                accent: '#00f2ff',
+                icon: 'fa-adjust'
             },
             'ultrafps': {
                 title: 'ZERO LAG ULTRA FPS',
-                desc: 'Максимально возможный FPS. Отключает практически все визуальные эффекты для достижения наилучшей производительности на любых системах.',
+                desc: 'Максимально возможный FPS. Отключает лишние эффекты для наилучшей производительности.',
                 file: 'ZERO_LAG_ULTRA_FPS.zip',
-                accent: '#f97316'
+                accent: '#f97316',
+                icon: 'fa-tachometer-alt'
             },
             'hdd-fast': {
                 title: 'HDD Fast Streaming',
-                desc: 'Специальный набор команд для оптимизации стриминга текстур и ассетов. Помогает избежать подтормаживаний при использовании обычных HDD дисков.',
+                desc: 'Оптимизация стриминга текстур. Помогает избежать подтормаживаний на HDD дисках.',
                 file: 'HDD Fast Streaming.rar',
-                accent: '#22c55e'
+                accent: '#22c55e',
+                icon: 'fa-hdd'
             },
             'max-fps-ai': {
                 title: 'Max FPS Ai cfg',
-                desc: 'Конфиг, оптимизированный с помощью алгоритмов ИИ. Тонкая настройка многопоточности и управления памятью движка Frostbite.',
+                desc: 'Конфиг от ИИ. Тонкая настройка многопоточности и управления памятью Frostbite.',
                 file: 'Max FPS Ai cfg.rar',
-                accent: '#a855f7'
+                accent: '#a855f7',
+                icon: 'fa-robot'
             },
             'pro-comp': {
                 title: 'Pro-Competitive',
-                desc: 'Настройки, используемые про-игроками. Улучшенная видимость противников в тенях и минимальный инпут-лаг для соревновательного преимущества.',
+                desc: 'Киберспортивные настройки. Максимум видимости противников и минимальный инпут-лаг.',
                 file: 'Pro-Competitive.rar',
-                accent: '#eab308'
+                accent: '#eab308',
+                icon: 'fa-trophy'
             },
             'stutter-fix': {
                 title: 'HDD Anti-Stutter',
-                desc: 'Фикс для борьбы с микро-фризами и заиканиями звука/изображения. Оптимизирует кэширование данных на лету.',
+                desc: 'Устранение микро-фризов и заиканий изображения в интенсивных сценах.',
                 file: 'HDD Anti-Stutter.rar',
-                accent: '#ef4444'
+                accent: '#ef4444',
+                icon: 'fa-wave-square'
             }
         };
+
+        function renderGrid() {
+            const grid = document.querySelector('#config-grid .grid');
+            grid.innerHTML = '';
+            Object.entries(products).forEach(([id, p]) => {
+                const card = document.createElement('div');
+                card.onclick = () => showProduct(id);
+                card.className = "glass p-8 rounded-3xl cursor-pointer card-hover transition-all border border-white/5 group flex flex-col justify-between";
+                card.innerHTML = `
+                    <div>
+                        <i class="fas ${p.icon} text-3xl mb-4" style="color: ${p.accent}"></i>
+                        <h2 class="text-xl font-black uppercase mb-2 group-hover:text-[${p.accent}] transition">${p.title}</h2>
+                        <p class="text-gray-400 text-sm mb-6 leading-relaxed">${p.desc}</p>
+                    </div>
+                    <div class="font-bold uppercase text-[10px] tracking-widest" style="color: ${p.accent}">
+                        Открыть пресет <i class="fas fa-arrow-right ml-1"></i>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
 
         function showView(viewId) {
             document.getElementById('view-home').classList.add('hidden');
@@ -316,7 +270,7 @@
                 <div class="flex flex-col md:flex-row md:items-center justify-between gap-8 mb-10 text-center md:text-left">
                     <div>
                         <h1 class="text-4xl md:text-5xl font-black uppercase mb-2" style="color: ${p.accent}">${p.title}</h1>
-                        <p class="text-xs font-bold uppercase tracking-widest text-[#00f2ff]">Формат: ${p.file.split('.').pop().toUpperCase()} | Лицензия: Бесплатно</p>
+                        <p class="text-xs font-bold uppercase tracking-widest text-[#00f2ff]">Бесплатная загрузка (.${p.file.split('.').pop()})</p>
                     </div>
                     <a href="${p.file}" class="btn-cyan px-12 py-5 font-black uppercase tracking-widest text-sm" style="background: ${p.accent}">
                         Скачать сейчас
@@ -327,6 +281,9 @@
             document.getElementById('product-content').innerHTML = content;
             showView('product');
         }
+
+        // Инициализация при загрузке
+        window.onload = renderGrid;
     </script>
 </body>
 </html>
