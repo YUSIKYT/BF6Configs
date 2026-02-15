@@ -9,10 +9,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
         
-        html {
-            scroll-behavior: smooth;
-        }
-
+        html { scroll-behavior: smooth; }
         body {
             font-family: 'Inter', sans-serif;
             background: #05070a;
@@ -26,7 +23,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(rgba(5, 7, 10, 0.7), rgba(5, 7, 10, 0.98)), url('bf6.jpg');
+            background: linear-gradient(rgba(5, 7, 10, 0.8), rgba(5, 7, 10, 0.95)), url('bf6.jpg');
             background-size: cover;
             background-position: center;
             z-index: -1;
@@ -49,57 +46,39 @@
             transform: scale(1.05);
         }
 
-        .card-hover:hover {
-            border-color: #00f2ff;
-            transform: translateY(-10px);
-            background: rgba(15, 23, 42, 0.8);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .view-section {
-            animation: fadeIn 0.6s ease-out forwards;
-        }
-
         .hero-section {
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 80px 24px 20px 24px;
+            padding: 100px 24px 40px 24px;
         }
 
         .promo-container {
             width: 100%;
-            max-width: 1000px;
-            margin-top: 2rem;
+            max-width: 900px;
+            margin-top: 3rem;
             position: relative;
-            z-index: 10;
         }
 
         .promo-image {
             width: 100%;
             height: auto;
-            filter: drop-shadow(0 0 40px rgba(0, 242, 255, 0.2));
             border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 40px rgba(0, 242, 255, 0.1);
             display: block;
-            margin: 0 auto;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .promo-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 100px;
-            background: linear-gradient(to top, #05070a, transparent);
-            pointer-events: none;
+        .card-hover:hover {
+            border-color: #00f2ff;
+            transform: translateY(-5px);
+            background: rgba(15, 23, 42, 0.8);
         }
+
+        .view-section { animation: fadeIn 0.5s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body class="min-h-screen">
@@ -121,24 +100,29 @@
             <h1 class="text-6xl md:text-8xl font-black mb-4 uppercase tracking-tighter leading-none">
                 Оптимизация <br><span class="text-[#00f2ff]">BF6</span>
             </h1>
-            <p class="text-gray-400 text-base md:text-lg max-w-2xl mx-auto font-light tracking-wide">
+            <p class="text-gray-400 text-base md:text-lg max-w-2xl mx-auto font-light tracking-wide mb-8">
                 Профессиональные конфигурации для максимальной производительности. 
                 Бесплатно и безопасно.
             </p>
+
+            <!-- Контейнер для фото -->
+            <div class="promo-container">
+                <img 
+                    src="BF6%20Soldiers.jpg" 
+                    id="promoImg" 
+                    alt="BF6 Soldiers" 
+                    class="promo-image"
+                    onerror="handleImageError(this)"
+                >
+            </div>
             
-            <a href="#config-grid" class="mt-8 flex flex-col items-center text-[10px] font-bold uppercase tracking-[0.4em] text-[#00f2ff] hover:text-white transition">
+            <a href="#config-grid" class="mt-12 flex flex-col items-center text-[10px] font-bold uppercase tracking-[0.4em] text-[#00f2ff] hover:text-white transition">
                 Листай вниз
                 <i class="fas fa-chevron-down mt-2 text-xl"></i>
             </a>
-
-            <div class="promo-container">
-                <!-- Путь изменен на BF6%20Soldiers.jpg согласно вашему запросу -->
-                <img src="BF6%20Soldiers.jpg" id="mainPromo" alt="BF6 Soldiers" class="promo-image">
-                <div class="promo-overlay"></div>
-            </div>
         </section>
 
-        <section id="config-grid" class="py-12 px-6 max-w-6xl mx-auto">
+        <section id="config-grid" class="py-20 px-6 max-w-6xl mx-auto">
             <div class="flex items-center space-x-4 mb-12">
                 <div class="h-px flex-1 bg-white/10"></div>
                 <h2 class="text-2xl font-black uppercase tracking-widest text-center">Доступные пресеты</h2>
@@ -165,11 +149,23 @@
         </div>
     </section>
 
-    <footer class="py-16 text-center">
+    <footer class="py-16 text-center border-t border-white/5">
         <p class="text-gray-600 text-[10px] uppercase tracking-[0.5em]">&copy; 2026 YUSIKYT | BF6 Zenith Labs</p>
     </footer>
 
     <script>
+        // Функция для исправления путей к картинке на лету
+        function handleImageError(img) {
+            const currentSrc = img.src;
+            if (currentSrc.includes('%20')) {
+                // Если с %20 не вышло, пробуем с обычным пробелом
+                img.src = "BF6 Soldiers.jpg";
+            } else if (!currentSrc.includes('.JPG') && !currentSrc.includes('.png')) {
+                // Если и так не вышло, пробуем изменить регистр расширения
+                img.src = "BF6 Soldiers.png";
+            }
+        }
+
         const products = {
             'zenith': { title: 'Frostbite Zenith', desc: 'Сбалансированный конфиг. Убирает визуальный шум и оптимизирует нагрузку на GPU.', file: 'Frostbite Zenith.zip', accent: '#00f2ff', icon: 'fa-adjust' },
             'ultrafps': { title: 'ZERO LAG ULTRA FPS', desc: 'Экстремальный прирост FPS. Идеально для слабых систем.', file: 'ZERO_LAG_ULTRA_FPS.zip', accent: '#f97316', icon: 'fa-tachometer-alt' },
@@ -186,12 +182,12 @@
             Object.entries(products).forEach(([id, p]) => {
                 const card = document.createElement('div');
                 card.onclick = () => showProduct(id);
-                card.className = "glass p-8 rounded-3xl cursor-pointer card-hover transition-all border border-white/5 group flex flex-col justify-between";
+                card.className = "glass p-8 rounded-3xl cursor-pointer card-hover transition-all border border-white/5 flex flex-col justify-between";
                 card.innerHTML = `
                     <div>
                         <i class="fas ${p.icon} text-3xl mb-4" style="color: ${p.accent}"></i>
-                        <h2 class="text-xl font-black uppercase mb-2 transition">${p.title}</h2>
-                        <p class="text-gray-400 text-sm mb-6 leading-relaxed">${p.desc}</p>
+                        <h2 class="text-xl font-black uppercase mb-2">${p.title}</h2>
+                        <p class="text-gray-400 text-sm mb-6">${p.desc}</p>
                     </div>
                     <div class="font-bold uppercase text-[10px] tracking-widest" style="color: ${p.accent}">Открыть <i class="fas fa-arrow-right ml-1"></i></div>
                 `;
@@ -210,7 +206,7 @@
             document.getElementById('product-content').innerHTML = `
                 <h1 class="text-4xl font-black uppercase mb-4" style="color: ${p.accent}">${p.title}</h1>
                 <p class="text-gray-300 mb-8">${p.desc}</p>
-                <a href="${p.file}" download class="btn-cyan px-12 py-5 font-black uppercase tracking-widest text-sm inline-block" style="background: ${p.accent}">Скачать</a>
+                <a href="${p.file}" download class="btn-cyan px-12 py-5 font-black uppercase tracking-widest text-sm inline-block" style="background: ${p.accent}">Скачать конфиг</a>
             `;
             showView('product');
         }
