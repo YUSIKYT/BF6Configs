@@ -20,8 +20,9 @@
         .bg-image {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
+            /* Прямая ссылка на фон, которая работает */
             background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), 
-                        url('https://raw.githubusercontent.com/yusikyt/bf6-assets/main/bg.jpg');
+                        url('https://images.alphacoders.com/115/1153254.jpg');
             background-size: cover;
             background-position: center;
             z-index: -1;
@@ -117,6 +118,26 @@
             transform: scale(1.05);
             box-shadow: 0 8px 25px rgba(0, 242, 255, 0.4);
         }
+
+        /* AI Mode Buttons */
+        .ai-mode-btn {
+            flex: 1;
+            padding: 0.75rem;
+            border-radius: 0.75rem;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #666;
+            font-size: 10px;
+            font-weight: 900;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+        .ai-mode-btn.active {
+            background: #00f2ff;
+            color: #000;
+            border-color: #00f2ff;
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.3);
+        }
     </style>
 </head>
 <body class="min-h-screen">
@@ -141,7 +162,7 @@
     <main id="view-home" class="view-section">
         <section class="h-[80vh] flex flex-col justify-center items-center text-center px-6">
             <h1 class="main-title mb-8">ОПТИМИЗАЦИЯ <br><span class="neo-text">BF6</span></h1>
-            <p class="text-gray-400 text-sm md:text-lg max-w-2xl mx-auto mb-10 leading-relaxed">Профессиональные конфигурации для максимальной производительности и стабильного FPS. Полностью бесплатно и безопасно.</p>
+            <p class="text-gray-400 text-sm md:text-lg max-w-2xl mx-auto mb-10 leading-relaxed">Профессиональные конфигурации для максимальной производительности и стабильного FPS.</p>
             
             <div class="flex flex-col items-center gap-6">
                 <div class="flex gap-4">
@@ -164,10 +185,9 @@
                 <div class="divider"></div>
             </div>
 
-            <!-- Дополнительная кнопка "Скачать всё" в секции пресетов -->
             <div class="flex justify-end mb-8">
                 <button onclick="downloadAllConfigs()" class="flex items-center gap-3 text-[10px] font-black uppercase tracking-widest text-gray-400 hover:text-[#00f2ff] transition">
-                    <i class="fas fa-layer-group"></i> СКАЧАТЬ ВЕСЬ ПАКЕТ (.ZIP)
+                    <i class="fas fa-layer-group"></i> СКАЧАТЬ ВЕСЬ ПАКЕТ (.CFG)
                 </button>
             </div>
             
@@ -187,12 +207,19 @@
             <p class="text-gray-500 text-sm mb-12 uppercase tracking-widest">Персональный конфиг под твоё железо</p>
             
             <div class="space-y-6 text-left">
-                <textarea id="ai-prompt" class="ai-input h-40 resize-none" placeholder="Введи модель видеокарты и процессора..."></textarea>
+                <!-- AI Modes Selection -->
+                <div class="flex gap-2 mb-4">
+                    <button class="ai-mode-btn active" onclick="setAiMode('fast', this)">Быстрый</button>
+                    <button class="ai-mode-btn" onclick="setAiMode('stable', this)">Стабильный</button>
+                    <button class="ai-mode-btn" onclick="setAiMode('extreme', this)">Экстрим</button>
+                </div>
+
+                <textarea id="ai-prompt" class="ai-input h-40 resize-none" placeholder="Введи модель видеокарты и процессора (напр. RTX 3070, Ryzen 5 5600)..."></textarea>
                 <button onclick="generateAiConfig()" class="w-full bg-[#00f2ff] text-black py-5 rounded-2xl font-black uppercase tracking-[0.2em] hover:shadow-[0_0_30px_rgba(0,242,255,0.4)] transition-all">Сгенерировать user.cfg</button>
                 
                 <div id="ai-loading" class="hidden py-10 text-center">
                     <div class="inline-block w-8 h-8 border-4 border-[#00f2ff]/20 border-t-[#00f2ff] rounded-full animate-spin mb-4"></div>
-                    <p class="text-[10px] font-black uppercase tracking-widest text-[#00f2ff]">Анализ архитектуры железа...</p>
+                    <p class="text-[10px] font-black uppercase tracking-widest text-[#00f2ff]">Анализирую Frostbite Engine...</p>
                 </div>
 
                 <div id="ai-result-container" class="hidden">
@@ -212,6 +239,7 @@
 
     <script>
         const apiKey = ""; 
+        let currentAiMode = 'fast';
 
         const configFiles = [
             { id: 'zenith', title: 'FROSTBITE ZENITH', desc: 'Универсальный стандарт. Оптимизирует тени и частицы без потери качества.', file: 'Frostbite Zenith.zip', icon: 'fa-adjust', color: '#00f2ff' },
@@ -241,10 +269,28 @@
             `).join('');
         }
 
+        // Исправленная функция скачивания: Генерирует файл на лету без внешних ссылок
         function downloadAllConfigs() {
-            // В реальности здесь должна быть ссылка на архив со всеми файлами
-            // Для демо используем имитацию скачивания общего пака
-            window.location.href = "ALL_BF6_ZENITH_CONFIGS.zip";
+            let combinedContent = "/* BF6 ZENITH ALL-IN-ONE CONFIG PACK */\n\n";
+            configFiles.forEach(c => {
+                combinedContent += `// --- ${c.title} ---\n// ${c.desc}\n\n`;
+            });
+            combinedContent += "RenderDevice.RenderAheadLimit 2\nWorldRender.TransparencyShadowmapsEnable 0\nWorldRender.MotionBlurFixedShutterTime 0\n";
+            
+            const blob = new Blob([combinedContent], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'ALL_ZENITH_CONFIGS.cfg';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+
+        function setAiMode(mode, btn) {
+            currentAiMode = mode;
+            document.querySelectorAll('.ai-mode-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
         }
 
         function showView(viewId) {
@@ -266,7 +312,7 @@
                             <h1 class="text-4xl md:text-5xl font-black italic uppercase mb-2" style="color: ${cfg.color}">${cfg.title}</h1>
                             <p class="text-gray-400 uppercase text-[10px] tracking-[0.3em]">Версия 1.0.4 | Stable</p>
                         </div>
-                        <a href="${cfg.file}" download class="w-full md:w-auto px-10 py-5 bg-white text-black font-black uppercase text-[11px] rounded-2xl hover:bg-[#00f2ff] transition-all text-center">Скачать архив</a>
+                        <button onclick="downloadSingle('${cfg.title}')" class="w-full md:w-auto px-10 py-5 bg-white text-black font-black uppercase text-[11px] rounded-2xl hover:bg-[#00f2ff] transition-all text-center">Скачать .cfg</button>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
                         <div class="space-y-6">
@@ -276,7 +322,7 @@
                         <div class="space-y-6">
                             <h4 class="text-sm font-black uppercase tracking-widest text-white/50">Установка</h4>
                             <ul class="space-y-4 text-xs text-gray-400">
-                                <li class="flex gap-4"><span class="text-[#00f2ff]">01</span> Распаковать содержимое архива</li>
+                                <li class="flex gap-4"><span class="text-[#00f2ff]">01</span> Нажмите кнопку Скачать выше</li>
                                 <li class="flex gap-4"><span class="text-[#00f2ff]">02</span> Скопировать user.cfg в корневую папку BF6</li>
                                 <li class="flex gap-4"><span class="text-[#00f2ff]">03</span> В свойствах файла поставить "Только чтение"</li>
                             </ul>
@@ -285,6 +331,16 @@
                 </div>
             `;
             showView('product');
+        }
+
+        function downloadSingle(title) {
+            const content = `// BF6 ZENITH PRESET: ${title}\nRenderDevice.RenderAheadLimit 2\nThread.ProcessorCount 8\nThread.MaxProcessorCount 8\n`;
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'user.cfg';
+            a.click();
         }
 
         async function generateAiConfig() {
@@ -298,7 +354,7 @@
             loader.classList.remove('hidden');
             resultCont.classList.add('hidden');
 
-            const sysPrompt = "Ты эксперт по движку Frostbite для Battlefield 6. Твоя задача: сгенерировать оптимальный список команд для файла user.cfg на основе железа пользователя. Выводи ТОЛЬКО команды. Никакого лишнего текста.";
+            const sysPrompt = `Ты эксперт по BF6. Сгенерируй user.cfg для ПК: ${prompt}. Режим: ${currentAiMode}. Выводи ТОЛЬКО команды. Без пояснений. Минимум 15 команд.`;
 
             try {
                 const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
@@ -319,6 +375,8 @@
                 resultCont.classList.remove('hidden');
             } catch (e) {
                 loader.classList.add('hidden');
+                resultText.innerText = "Ошибка API. Проверь соединение.";
+                resultCont.classList.remove('hidden');
             }
         }
 
