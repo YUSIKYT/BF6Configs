@@ -17,7 +17,6 @@
             overflow-x: hidden;
         }
 
-        /* Установка фона bf6.jpg */
         .bg-image {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -62,63 +61,9 @@
             text-shadow: 0 0 20px rgba(0, 242, 255, 0.5);
         }
 
-        .section-header {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-            width: 100%;
-            margin-bottom: 4rem;
-        }
-        
-        .section-header::before, .section-header::after {
-            content: "";
-            height: 1px;
-            flex-grow: 1;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 900;
-            font-style: italic;
-            text-transform: uppercase;
-            letter-spacing: -0.02em;
-        }
-
         .view-section { animation: fadeIn 0.4s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
 
-        .btn-scroll {
-            font-size: 10px;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 0.3em;
-            color: #00f2ff;
-            transition: 0.3s;
-        }
-        
-        .btn-scroll:hover { color: #fff; }
-
-        .download-all-btn {
-            background: linear-gradient(90deg, #00f2ff, #0099ff);
-            color: #000;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            padding: 1.5rem 3rem;
-            border-radius: 1rem;
-            transition: all 0.3s;
-            box-shadow: 0 0 30px rgba(0, 242, 255, 0.3);
-        }
-
-        .download-all-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 50px rgba(0, 242, 255, 0.5);
-            filter: brightness(1.1);
-        }
-
-        /* AI Section Styles */
         .ai-input {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -129,10 +74,8 @@
             outline: none;
             transition: 0.3s;
         }
-        .ai-input:focus {
-            border-color: #00f2ff;
-            background: rgba(255, 255, 255, 0.05);
-        }
+        .ai-input:focus { border-color: #00f2ff; }
+
         .ai-result-box {
             background: #050505;
             border: 1px solid #1a1a1a;
@@ -144,14 +87,58 @@
             white-space: pre-wrap;
             text-align: left;
             margin-top: 1.5rem;
-            position: relative;
         }
+
+        /* Режимы ИИ */
+        .mode-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #666;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 10px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: 0.3s;
+            flex: 1;
+        }
+        .mode-btn.active {
+            background: #00f2ff;
+            color: #000;
+            border-color: #00f2ff;
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.4);
+        }
+
+        .scanner-container {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            background: rgba(0, 242, 255, 0.02);
+            border: 1px solid rgba(0, 242, 255, 0.1);
+            border-radius: 1rem;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .scan-line {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 2px;
+            background: #00f2ff;
+            box-shadow: 0 0 15px #00f2ff;
+            animation: scanMove 2s infinite linear;
+            z-index: 10;
+        }
+
+        @keyframes scanMove { 0% { top: 0; } 100% { top: 100%; } }
     </style>
 </head>
 <body class="min-h-screen">
     <div class="bg-image"></div>
 
-    <!-- Навигация -->
     <nav class="glass sticky top-0 z-50 px-8 py-5 flex justify-between items-center">
         <div class="flex items-center space-x-2 cursor-pointer" onclick="showView('home')">
             <span class="text-xl font-black italic tracking-tighter uppercase">BF6 <span class="neo-text">ZENITH</span></span>
@@ -160,140 +147,70 @@
             <a href="#" onclick="showView('home')" class="hover:text-[#00f2ff] transition text-white">Главная</a>
             <a href="#" onclick="showView('ai')" class="px-4 py-2 bg-[#00f2ff]/10 border border-[#00f2ff]/30 rounded-lg text-[#00f2ff] hover:bg-[#00f2ff] hover:text-black transition-all">Ai CFG</a>
             <a href="https://discord.gg/yourlink" target="_blank" class="text-gray-400 hover:text-white transition">Discord</a>
-            <a href="#" onclick="showView('admin')" class="text-gray-400 hover:text-white transition">Панель</a>
         </div>
     </nav>
 
-    <!-- Главный экран -->
     <main id="view-home" class="view-section">
         <section class="h-[85vh] flex flex-col justify-center items-center text-center px-6">
-            <h1 class="main-title mb-6">
-                ОПТИМИЗАЦИЯ <br><span class="neo-text">BF6</span>
-            </h1>
-            <p class="text-gray-400 text-sm md:text-lg max-w-2xl mx-auto font-medium mb-12 opacity-80">
-                Профессиональные конфигурации для максимальной производительности и стабильного FPS. Полностью бесплатно и безопасно.
-            </p>
-            
-            <a href="#config-grid" class="btn-scroll flex flex-col items-center group">
-                листай вниз
-                <i class="fas fa-chevron-down mt-4 text-lg animate-bounce group-hover:text-white"></i>
-            </a>
-        </section>
-
-        <!-- Сетка пресетов -->
-        <section id="config-grid" class="py-32 px-8 max-w-7xl mx-auto text-center">
-            <div class="section-header">
-                <h2 class="section-title text-center">ДОСТУПНЫЕ <span class="neo-text">CFG</span></h2>
-            </div>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-20" id="main-grid">
-                <!-- Контент из JS -->
-            </div>
-
-            <button onclick="downloadAllConfigs()" class="download-all-btn inline-flex items-center gap-4">
-                <i class="fas fa-file-archive text-xl"></i>
-                Скачать все CFG
-            </button>
-            <p class="text-gray-500 text-[10px] mt-6 uppercase tracking-widest opacity-50">
-                * Браузер может запросить разрешение на скачивание нескольких файлов
-            </p>
+            <h1 class="main-title mb-6">ОПТИМИЗАЦИЯ <br><span class="neo-text">BF6</span></h1>
+            <p class="text-gray-400 text-sm md:text-lg max-w-2xl mx-auto mb-12 opacity-80">Лучшие пресеты и умная генерация через ИИ.</p>
+            <button onclick="showView('ai')" class="px-10 py-5 bg-[#00f2ff] text-black font-black uppercase rounded-xl hover:scale-105 transition">Перейти к ИИ</button>
         </section>
     </main>
 
-    <!-- AI ГЕНЕРАТОР -->
     <section id="view-ai" class="view-section py-20 px-6 hidden">
         <div class="max-w-3xl mx-auto card-custom p-10 md:p-16 rounded-[40px] text-center">
-            <button onclick="showView('home')" class="mb-10 text-gray-400 hover:text-white transition flex items-center uppercase text-[11px] font-black tracking-widest">
+            <button onclick="showView('home')" class="mb-10 text-gray-400 hover:text-white flex items-center uppercase text-[10px] font-black">
                 <i class="fas fa-arrow-left mr-3"></i> на главную
             </button>
-            <h2 class="text-4xl font-black italic uppercase mb-2">AI <span class="neo-text">GENERATOR</span></h2>
-            <p class="text-gray-400 text-sm mb-10 uppercase tracking-widest opacity-60">Умная настройка под твое железо</p>
+            <h2 class="text-4xl font-black italic uppercase mb-2">AI <span class="neo-text">PRO TUNER</span></h2>
+            <p class="text-gray-400 text-[10px] mb-10 uppercase tracking-widest opacity-60">Анализ сети и поиск по базам данных в реальном времени</p>
             
             <div class="space-y-6 text-left">
+                <div class="flex gap-2 mb-4">
+                    <button class="mode-btn active" onclick="setAiMode('fast', this)">Быстрый</button>
+                    <button class="mode-btn" onclick="setAiMode('medium', this)">Стабильный</button>
+                    <button class="mode-btn" onclick="setAiMode('extreme', this)">Экстремальный</button>
+                </div>
+
                 <div>
-                    <label class="text-[10px] font-black uppercase tracking-widest text-[#00f2ff] mb-3 block">Опиши свой ПК (Процессор, Видеокарта, ОЗУ)</label>
-                    <textarea id="ai-prompt" class="ai-input h-32" placeholder="Например: RTX 3060, i5-12400f, 16gb RAM. Нужно больше FPS..."></textarea>
+                    <label class="text-[10px] font-black uppercase tracking-widest text-[#00f2ff] mb-3 block">Конфигурация железа и пожелания</label>
+                    <textarea id="ai-prompt" class="ai-input h-32" placeholder="Например: RTX 4070, i7-13700. Нужен максимальный буст FPS..."></textarea>
                 </div>
                 
                 <button id="ai-gen-btn" onclick="generateAiConfig()" class="w-full bg-[#00f2ff] text-black py-5 rounded-xl font-black uppercase tracking-widest hover:scale-[1.02] transition-transform flex items-center justify-center gap-3">
-                    <i class="fas fa-magic"></i> Сгенерировать CFG
+                    <i class="fas fa-microchip"></i> Начать поиск и анализ
                 </button>
 
-                <div id="ai-loading" class="hidden text-[#00f2ff] animate-pulse py-4 font-black uppercase text-[10px] tracking-widest">
-                    ИИ анализирует железо...
+                <div id="ai-loading" class="hidden">
+                    <div class="scanner-container mt-6">
+                        <div class="scan-line"></div>
+                        <div class="z-20 text-center">
+                            <i class="fas fa-search-plus text-4xl text-[#00f2ff] animate-pulse mb-4"></i>
+                            <div id="ai-status" class="text-[#00f2ff] font-black uppercase text-[10px] tracking-[0.3em]"></div>
+                            <div id="data-text" class="text-[8px] text-gray-500 mt-2 font-mono"></div>
+                        </div>
+                    </div>
                 </div>
 
                 <div id="ai-result-container" class="hidden">
                     <div class="ai-result-box" id="ai-result-text"></div>
                     <button onclick="downloadGeneratedConfig()" class="mt-6 w-full bg-white text-black py-4 rounded-xl font-black uppercase tracking-widest hover:bg-[#00f2ff] transition-colors flex items-center justify-center gap-3">
-                        <i class="fas fa-download"></i> Скачать user.cfg
+                        <i class="fas fa-download"></i> Скачать .cfg файл
                     </button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Продукт -->
-    <section id="view-product" class="view-section py-20 px-6 hidden">
-        <div class="max-w-4xl mx-auto">
-            <button onclick="showView('home')" class="mb-10 text-gray-400 hover:text-white transition flex items-center uppercase text-[11px] font-black tracking-widest">
-                <i class="fas fa-arrow-left mr-3"></i> назад к списку
-            </button>
-            <div class="card-custom p-10 md:p-16 rounded-[40px]" id="product-content"></div>
-        </div>
-    </section>
-
-    <!-- Админка -->
-    <section id="view-admin" class="view-section py-24 px-6 hidden">
-        <div class="max-w-md mx-auto card-custom p-12 rounded-3xl text-center">
-            <h2 class="text-2xl font-black mb-8 uppercase italic tracking-tighter">Вход в <span class="neo-text">LABS</span></h2>
-            <input type="password" placeholder="КЛЮЧ ДОСТУПА" class="w-full bg-black/60 border border-white/10 p-5 rounded-xl mb-6 outline-none focus:border-[#00f2ff] transition-all text-sm font-bold tracking-widest">
-            <button class="w-full bg-[#00f2ff] text-black py-5 rounded-xl font-black uppercase tracking-widest hover:scale-[1.02] transition-transform">Авторизация</button>
-        </div>
-    </section>
-
-    <footer class="py-20 text-center opacity-20 border-t border-white/5">
-        <p class="text-[10px] uppercase tracking-[0.8em] font-black">© 2026 YUSIKYT | BF6 ZENITH LABS</p>
-    </footer>
-
     <script>
         const apiKey = "AIzaSyAfrWlkd4_jEx0JXXO3AlrBlBmDx8KylJo";
-        
-        const products = {
-            'zenith': { title: 'Frostbite Zenith', desc: 'Универсальный стандарт. Оптимизирует тени и частицы без потери качества.', file: 'Frostbite Zenith.zip', accent: '#00f2ff', icon: 'fa-adjust' },
-            'ultrafps': { title: 'ZERO LAG ULTRA FPS', desc: 'Минимальные задержки и максимальный FPS для слабых ПК.', file: 'ZERO_LAG_ULTRA_FPS.zip', accent: '#f97316', icon: 'fa-tachometer-alt' },
-            'net-master': { title: 'NETWORK MASTER', desc: 'Улучшает регистрацию попаданий и снижает сетевой джиттер.', file: 'NETWORK MASTER.rar', accent: '#3b82f6', icon: 'fa-wifi' },
-            'rtx-ultra': { title: 'RTX PERFORMANCE', desc: 'Оптимизация Reflex и баланс теней для карт 30/40 серии.', file: 'RTX ULTRA PERFORMANCE (Для 30 40 серии).rar', accent: '#22c55e', icon: 'fa-microchip' },
-            'cpu-stable': { title: 'CPU STABILITY', desc: 'Снижает 0.1% low FPS, убирая микро-фризы процессора.', file: 'CPU STABILITY.rar', accent: '#ef4444', icon: 'fa-bolt' },
-            'ai-cfg': { title: 'Max FPS Ai cfg', desc: 'Автоматизированный конфиг на базе ИИ анализа.', file: 'Max FPS Ai cfg.rar', accent: '#a855f7', icon: 'fa-robot' },
-            'pro-comp': { title: 'Pro-Competitive', desc: 'Киберспортивные настройки для лучшей видимости.', file: 'Pro-Competitive.rar', accent: '#eab308', icon: 'fa-crosshairs' },
-            'global-fix': { title: 'GLOBAL SYSTEM FIX', desc: 'Очистка кэша и реестра для лучшей работы Battlefield.', file: 'GLOBAL_FIX.rar', accent: '#ffffff', icon: 'fa-tools' }
-        };
+        let currentAiMode = 'fast';
 
-        function renderGrid() {
-            const grid = document.getElementById('main-grid');
-            if(!grid) return;
-            grid.innerHTML = '';
-            
-            Object.entries(products).forEach(([id, p]) => {
-                const card = document.createElement('div');
-                card.onclick = () => showProduct(id);
-                card.className = "card-custom p-10 rounded-[28px] cursor-pointer flex flex-col h-full group text-left";
-                card.innerHTML = `
-                    <div class="mb-6">
-                        <div class="w-12 h-12 rounded-xl mb-8 flex items-center justify-center bg-white/5 group-hover:bg-white/10 transition-colors">
-                            <i class="fas ${p.icon} text-2xl" style="color: ${p.accent}"></i>
-                        </div>
-                        <h2 class="text-xl font-black uppercase mb-4 text-white italic leading-tight">${p.title}</h2>
-                        <p class="text-gray-500 text-xs font-medium leading-relaxed">${p.desc}</p>
-                    </div>
-                    <div class="mt-auto pt-8 flex items-center justify-between border-t border-white/5">
-                        <span class="text-[10px] font-black uppercase tracking-widest" style="color: ${p.accent}">Просмотр</span>
-                        <i class="fas fa-arrow-right text-[10px] group-hover:translate-x-2 transition-transform" style="color: ${p.accent}"></i>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
+        function setAiMode(mode, btn) {
+            currentAiMode = mode;
+            document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
         }
 
         async function generateAiConfig() {
@@ -302,6 +219,8 @@
             const loader = document.getElementById('ai-loading');
             const resultCont = document.getElementById('ai-result-container');
             const resultText = document.getElementById('ai-result-text');
+            const statusText = document.getElementById('ai-status');
+            const dataText = document.getElementById('data-text');
 
             if (!prompt.trim()) return;
 
@@ -309,29 +228,65 @@
             loader.classList.remove('hidden');
             resultCont.classList.add('hidden');
 
-            const systemPrompt = "Ты — эксперт по оптимизации Battlefield 6. Твоя задача — сгенерировать содержимое файла user.cfg на основе железа пользователя. Выдавай ТОЛЬКО чистый код параметров Battlefield 6 (например, RenderDevice.RenderAheadLimit 2). Не пиши лишний текст, только команды. Оптимизируй под стабильный FPS и низкий инпут-лаг.";
+            // Симуляция этапов
+            const steps = [
+                "Сканирование системы...",
+                "Поиск актуальных команд в сети...",
+                "Проверка совместимости с BF6...",
+                "Генерация оптимального кода..."
+            ];
+            let stepIdx = 0;
+            const stepInterval = setInterval(() => {
+                statusText.innerText = steps[stepIdx % steps.length];
+                stepIdx++;
+            }, 800);
+
+            const dataInterval = setInterval(() => {
+                const hex = Math.random().toString(16).toUpperCase().substring(2, 12);
+                dataText.innerText = `NET_SEARCH: BF6_TWEAK_DB_${hex} | VALIDATING_CMD...`;
+            }, 100);
+
+            // Настройка системного промпта в зависимости от режима
+            let complexity = "Короткий конфиг, только самые важные команды.";
+            if(currentAiMode === 'medium') complexity = "Средний конфиг, баланс качества и FPS, около 20 команд.";
+            if(currentAiMode === 'extreme') complexity = "Максимально длинный конфиг, все возможные хаки для FPS и стабильности. Минимум 40 команд.";
+
+            const systemPrompt = `Ты — AI-эксперт по Battlefield 6. Твоя задача: сгенерировать идеальный user.cfg. 
+            Используй поиск в интернете для нахождения последних актуальных настроек.
+            Выдавай ТОЛЬКО команды движка Frostbite. Без лишних слов.
+            Режим сложности: ${complexity}.
+            Железо пользователя: ${prompt}.`;
 
             try {
                 const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        contents: [{ parts: [{ text: `Моё железо: ${prompt}. Напиши лучший user.cfg для BF6.` }] }],
-                        systemInstruction: { parts: [{ text: systemPrompt }] }
+                        contents: [{ parts: [{ text: `Сгенерируй профессиональный конфиг для моего ПК: ${prompt}` }] }],
+                        systemInstruction: { parts: [{ text: systemPrompt }] },
+                        tools: [{ "google_search": {} }]
                     })
                 });
 
                 const data = await response.json();
-                const text = data.candidates?.[0]?.content?.parts?.[0]?.text || "Ошибка генерации. Попробуйте снова.";
-                
-                resultText.innerText = text.trim();
-                resultCont.classList.remove('hidden');
+                const text = data.candidates?.[0]?.content?.parts?.[0]?.text || "Ошибка доступа.";
+
+                setTimeout(() => {
+                    clearInterval(stepInterval);
+                    clearInterval(dataInterval);
+                    resultText.innerText = text.trim();
+                    resultCont.classList.remove('hidden');
+                    loader.classList.add('hidden');
+                    btn.disabled = false;
+                }, 3000);
+
             } catch (error) {
-                resultText.innerText = "Ошибка подключения к ИИ.";
+                clearInterval(stepInterval);
+                clearInterval(dataInterval);
+                resultText.innerText = "Ошибка соединения.";
                 resultCont.classList.remove('hidden');
-            } finally {
-                btn.disabled = false;
                 loader.classList.add('hidden');
+                btn.disabled = false;
             }
         }
 
@@ -346,72 +301,11 @@
             window.URL.revokeObjectURL(url);
         }
 
-        function downloadAllConfigs() {
-            const files = Object.values(products).map(p => p.file);
-            let delay = 0;
-            files.forEach(file => {
-                setTimeout(() => {
-                    const link = document.createElement('a');
-                    link.href = file;
-                    link.download = file;
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                }, delay);
-                delay += 500;
-            });
-        }
-
         function showView(viewId) {
-            ['home', 'product', 'admin', 'ai'].forEach(v => {
-                const el = document.getElementById('view-' + v);
-                if(el) el.classList.add('hidden');
-            });
+            ['home', 'ai'].forEach(v => document.getElementById('view-' + v).classList.add('hidden'));
             document.getElementById('view-' + viewId).classList.remove('hidden');
             window.scrollTo(0, 0);
         }
-
-        function showProduct(id) {
-            const p = products[id];
-            document.getElementById('product-content').innerHTML = `
-                <div class="flex flex-col md:flex-row md:items-center justify-between gap-10 text-left">
-                    <div>
-                        <h1 class="text-4xl md:text-6xl font-black uppercase italic mb-4" style="color: ${p.accent}">${p.title}</h1>
-                        <p class="text-gray-400 text-lg font-light">${p.desc}</p>
-                    </div>
-                    <a href="${p.file}" download class="whitespace-nowrap px-12 py-5 font-black uppercase tracking-widest text-xs text-black rounded-2xl shadow-xl hover:scale-105 transition-transform" style="background: ${p.accent}">
-                        <i class="fas fa-download mr-2"></i> Скачать файл
-                    </a>
-                </div>
-                <div class="h-px bg-white/5 w-full my-12"></div>
-                <div class="text-left">
-                    <h3 class="text-sm font-black uppercase mb-8 tracking-[0.2em] opacity-50">Инструкция по установке</h3>
-                    <div class="grid gap-4">
-                        <div class="flex items-center gap-4 bg-white/5 p-5 rounded-2xl border-l-4" style="border-color: ${p.accent}">
-                            <span class="text-xl font-black opacity-20">01</span>
-                            <p class="text-gray-300 text-sm">Скачайте архив (zip или rar) и распакуйте его.</p>
-                        </div>
-                        <div class="flex items-center gap-4 bg-white/5 p-5 rounded-2xl border-l-4" style="border-color: ${p.accent}">
-                            <span class="text-xl font-black opacity-20">02</span>
-                            <p class="text-gray-300 text-sm">Перенесите файл <span class="text-white font-bold">user.cfg</span> в корневую папку игры BF6.</p>
-                        </div>
-                        <div class="flex items-center gap-4 bg-white/5 p-5 rounded-2xl border-l-4" style="border-color: ${p.accent}">
-                            <span class="text-xl font-black opacity-20">03</span>
-                            <p class="text-gray-300 text-sm">Открывайте игру и наслаждайтесь результатом.</p>
-                        </div>
-                    </div>
-                    <div class="mt-8 p-4 bg-red-900/20 border border-red-500/30 rounded-xl">
-                        <p class="text-red-400 text-xs font-bold uppercase tracking-wider">
-                            <i class="fas fa-exclamation-triangle mr-2"></i> Примечание:
-                        </p>
-                        <p class="text-gray-400 text-xs mt-1">Не меняйте графику игры и другие настройки после установки, чтобы конфиг не слетел.</p>
-                    </div>
-                </div>
-            `;
-            showView('product');
-        }
-
-        window.onload = renderGrid;
     </script>
 </body>
 </html>
