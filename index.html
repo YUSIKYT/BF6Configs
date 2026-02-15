@@ -60,17 +60,8 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes bounceSlow {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(10px); }
-        }
-
         .view-section {
             animation: fadeIn 0.6s ease-out forwards;
-        }
-
-        .scroll-indicator {
-            animation: bounceSlow 2s infinite;
         }
 
         .hero-section {
@@ -79,23 +70,35 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 100px 24px 40px 24px;
+            padding: 80px 24px 20px 24px;
         }
 
         .promo-container {
             width: 100%;
-            max-width: 900px;
-            margin-top: 40px;
+            max-width: 1000px;
+            margin-top: 2rem;
             position: relative;
+            z-index: 10;
         }
 
         .promo-image {
             width: 100%;
             height: auto;
-            filter: drop-shadow(0 0 30px rgba(0, 242, 255, 0.25));
+            filter: drop-shadow(0 0 50px rgba(0, 242, 255, 0.15));
             border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             display: block;
+            object-fit: cover;
+        }
+
+        /* Адаптация под макет пользователя */
+        .promo-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 150px;
+            background: linear-gradient(to top, #05070a, transparent);
         }
     </style>
 </head>
@@ -126,19 +129,20 @@
                 Полностью бесплатно и безопасно.
             </p>
             
-            <a href="#config-grid" class="mt-8 mb-4 flex flex-col items-center text-[10px] font-bold uppercase tracking-[0.4em] text-[#00f2ff] hover:text-white transition group">
+            <a href="#config-grid" class="mt-8 flex flex-col items-center text-[10px] font-bold uppercase tracking-[0.4em] text-[#00f2ff] hover:text-white transition">
                 Листай вниз
-                <i class="fas fa-chevron-down mt-2 text-xl scroll-indicator"></i>
+                <i class="fas fa-chevron-down mt-2 text-xl"></i>
             </a>
 
-            <!-- Промо-фотография -->
+            <!-- Промо-фотография: BF6 Soldiers.jpg -->
             <div class="promo-container">
-                <img src="BF6 Soldiers.jpg" alt="BF6 Soldiers" class="promo-image">
+                <img src="BF6%20Soldiers.jpg" alt="BF6 Soldiers" class="promo-image">
+                <div class="promo-overlay"></div>
             </div>
         </section>
 
         <!-- Сетка конфигов -->
-        <section id="config-grid" class="py-24 px-6 max-w-6xl mx-auto">
+        <section id="config-grid" class="py-12 px-6 max-w-6xl mx-auto">
             <div class="flex items-center space-x-4 mb-12">
                 <div class="h-px flex-1 bg-white/10"></div>
                 <h2 class="text-2xl font-black uppercase tracking-widest text-center">Доступные пресеты</h2>
@@ -146,7 +150,7 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Карточки -->
+                <!-- Генерируется через JS -->
             </div>
         </section>
     </main>
@@ -157,30 +161,7 @@
             <button onclick="showView('home')" class="mb-8 text-gray-500 hover:text-white transition flex items-center uppercase text-xs font-bold tracking-widest">
                 <i class="fas fa-chevron-left mr-2"></i> Вернуться назад
             </button>
-
-            <div class="glass p-8 md:p-12 rounded-3xl">
-                <div id="product-content"></div>
-
-                <div class="mt-12 pt-12 border-t border-white/10">
-                    <h3 class="text-xl font-black uppercase mb-8 flex items-center">
-                        <i class="fas fa-terminal mr-3 text-[#00f2ff]"></i> Гайд по установке
-                    </h3>
-                    <div class="space-y-6">
-                        <div class="flex items-start">
-                            <div class="w-8 h-8 rounded-lg bg-[#00f2ff]/10 flex items-center justify-center mr-4 text-[#00f2ff] font-black shrink-0">1</div>
-                            <p class="text-gray-300 text-sm leading-relaxed pt-1">Загрузите архив и распакуйте файл <b>user.cfg</b>.</p>
-                        </div>
-                        <div class="flex items-start">
-                            <div class="w-8 h-8 rounded-lg bg-[#00f2ff]/10 flex items-center justify-center mr-4 text-[#00f2ff] font-black shrink-0">2</div>
-                            <p class="text-gray-300 text-sm leading-relaxed pt-1">Откройте папку с игрой (там, где лежит BF6.exe).</p>
-                        </div>
-                        <div class="flex items-start">
-                            <div class="w-8 h-8 rounded-lg bg-[#00f2ff]/10 flex items-center justify-center mr-4 text-[#00f2ff] font-black shrink-0">3</div>
-                            <p class="text-gray-300 text-sm leading-relaxed pt-1">Перетащите <b>user.cfg</b> в папку с заменой.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div class="glass p-8 md:p-12 rounded-3xl" id="product-content"></div>
         </div>
     </section>
 
@@ -189,7 +170,7 @@
         <div class="max-w-md mx-auto glass p-8 rounded-2xl text-center">
             <h2 class="text-2xl font-black mb-6 uppercase">CMS Вход</h2>
             <input type="password" id="admin-pass" placeholder="Пароль" class="w-full bg-black/40 border border-white/10 p-3 rounded mb-6 outline-none focus:border-[#00f2ff]">
-            <button onclick="alert('Режим просмотра')" class="w-full btn-cyan py-3 font-bold uppercase tracking-widest">Авторизация</button>
+            <button class="w-full btn-cyan py-3 font-bold uppercase tracking-widest">Авторизация</button>
         </div>
     </section>
 
@@ -199,48 +180,12 @@
 
     <script>
         const products = {
-            'zenith': {
-                title: 'Frostbite Zenith',
-                desc: 'Сбалансированный конфиг. Убирает визуальный шум и оптимизирует нагрузку на GPU.',
-                file: 'Frostbite Zenith.zip',
-                accent: '#00f2ff',
-                icon: 'fa-adjust'
-            },
-            'ultrafps': {
-                title: 'ZERO LAG ULTRA FPS',
-                desc: 'Экстремальный прирост FPS. Идеально для слабых систем и соревновательного геймплея.',
-                file: 'ZERO_LAG_ULTRA_FPS.zip',
-                accent: '#f97316',
-                icon: 'fa-tachometer-alt'
-            },
-            'hdd-fast': {
-                title: 'HDD Fast Streaming',
-                desc: 'Улучшает подгрузку данных на HDD, минимизируя фризы при перемещении по карте.',
-                file: 'HDD Fast Streaming.rar',
-                accent: '#22c55e',
-                icon: 'fa-hdd'
-            },
-            'max-fps-ai': {
-                title: 'Max FPS Ai cfg',
-                desc: 'Продвинутый конфиг, оптимизированный нейросетью для лучшего распределения потоков CPU.',
-                file: 'Max FPS Ai cfg.rar',
-                accent: '#a855f7',
-                icon: 'fa-robot'
-            },
-            'pro-comp': {
-                title: 'Pro-Competitive',
-                desc: 'Киберспортивный пресет. Чистая картинка без лишнего мусора для лучшего обнаружения целей.',
-                file: 'Pro-Competitive.rar',
-                accent: '#eab308',
-                icon: 'fa-trophy'
-            },
-            'stutter-fix': {
-                title: 'HDD Anti-Stutter',
-                desc: 'Устраняет рывки и нестабильное время кадра на конфигурациях с медленной памятью.',
-                file: 'HDD Anti-Stutter.rar',
-                accent: '#ef4444',
-                icon: 'fa-wave-square'
-            }
+            'zenith': { title: 'Frostbite Zenith', desc: 'Сбалансированный конфиг. Убирает визуальный шум и оптимизирует нагрузку на GPU.', file: 'Frostbite Zenith.zip', accent: '#00f2ff', icon: 'fa-adjust' },
+            'ultrafps': { title: 'ZERO LAG ULTRA FPS', desc: 'Экстремальный прирост FPS. Идеально для слабых систем и соревновательного геймплея.', file: 'ZERO_LAG_ULTRA_FPS.zip', accent: '#f97316', icon: 'fa-tachometer-alt' },
+            'hdd-fast': { title: 'HDD Fast Streaming', desc: 'Улучшает подгрузку данных на HDD, минимизируя фризы при перемещении по карте.', file: 'HDD Fast Streaming.rar', accent: '#22c55e', icon: 'fa-hdd' },
+            'max-fps-ai': { title: 'Max FPS Ai cfg', desc: 'Продвинутый конфиг, оптимизированный нейросетью для лучшего распределения потоков CPU.', file: 'Max FPS Ai cfg.rar', accent: '#a855f7', icon: 'fa-robot' },
+            'pro-comp': { title: 'Pro-Competitive', desc: 'Киберспортивный пресет. Чистая картинка без лишнего мусора для лучшего обнаружения целей.', file: 'Pro-Competitive.rar', accent: '#eab308', icon: 'fa-trophy' },
+            'stutter-fix': { title: 'HDD Anti-Stutter', desc: 'Устраняет рывки и нестабильное время кадра на конфигурациях с медленной памятью.', file: 'HDD Anti-Stutter.rar', accent: '#ef4444', icon: 'fa-wave-square' }
         };
 
         function renderGrid() {
@@ -254,40 +199,28 @@
                 card.innerHTML = `
                     <div>
                         <i class="fas ${p.icon} text-3xl mb-4" style="color: ${p.accent}"></i>
-                        <h2 class="text-xl font-black uppercase mb-2 group-hover:text-[${p.accent}] transition">${p.title}</h2>
+                        <h2 class="text-xl font-black uppercase mb-2 transition">${p.title}</h2>
                         <p class="text-gray-400 text-sm mb-6 leading-relaxed">${p.desc}</p>
                     </div>
-                    <div class="font-bold uppercase text-[10px] tracking-widest" style="color: ${p.accent}">
-                        Открыть <i class="fas fa-arrow-right ml-1"></i>
-                    </div>
+                    <div class="font-bold uppercase text-[10px] tracking-widest" style="color: ${p.accent}">Открыть <i class="fas fa-arrow-right ml-1"></i></div>
                 `;
                 grid.appendChild(card);
             });
         }
 
         function showView(viewId) {
-            document.getElementById('view-home').classList.add('hidden');
-            document.getElementById('view-product').classList.add('hidden');
-            document.getElementById('view-admin').classList.add('hidden');
+            ['home', 'product', 'admin'].forEach(v => document.getElementById('view-' + v).classList.add('hidden'));
             document.getElementById('view-' + viewId).classList.remove('hidden');
             window.scrollTo(0, 0);
         }
 
         function showProduct(id) {
             const p = products[id];
-            const content = `
-                <div class="flex flex-col md:flex-row md:items-center justify-between gap-8 mb-10 text-center md:text-left">
-                    <div>
-                        <h1 class="text-4xl md:text-5xl font-black uppercase mb-2" style="color: ${p.accent}">${p.title}</h1>
-                        <p class="text-xs font-bold uppercase tracking-widest text-[#00f2ff]">Архив: ${p.file} | Безопасно</p>
-                    </div>
-                    <a href="${p.file}" download class="btn-cyan px-12 py-5 font-black uppercase tracking-widest text-sm" style="background: ${p.accent}">
-                        Скачать
-                    </a>
-                </div>
-                <p class="text-xl text-gray-300 leading-relaxed font-light">${p.desc}</p>
+            document.getElementById('product-content').innerHTML = `
+                <h1 class="text-4xl font-black uppercase mb-4" style="color: ${p.accent}">${p.title}</h1>
+                <p class="text-gray-300 mb-8">${p.desc}</p>
+                <a href="${p.file}" download class="btn-cyan px-12 py-5 font-black uppercase tracking-widest text-sm inline-block" style="background: ${p.accent}">Скачать конфиг</a>
             `;
-            document.getElementById('product-content').innerHTML = content;
             showView('product');
         }
 
