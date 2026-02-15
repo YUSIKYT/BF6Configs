@@ -17,192 +17,227 @@
             overflow-x: hidden;
         }
 
-        /* Фоновое изображение как на скриншотах */
+        /* Возвращаем фон с использованием загруженного файла */
         .bg-image {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(5, 7, 10, 0.7), rgba(5, 7, 10, 0.9)), 
-                        url('https://i.ytimg.com/vi/S7v-N9ApxhY/maxresdefault.jpg');
+            background: linear-gradient(rgba(5, 7, 10, 0.75), rgba(5, 7, 10, 0.95)), 
+                        url('BF6 Soldiers.jpg');
             background-size: cover;
             background-position: center;
             z-index: -1;
         }
 
         .glass {
-            background: rgba(15, 23, 42, 0.8);
+            background: rgba(15, 23, 42, 0.85);
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .card-custom {
-            background: rgba(10, 15, 25, 0.9);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
+            background: rgba(13, 18, 28, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .card-custom:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
             border-color: #00f2ff;
-            box-shadow: 0 10px 30px rgba(0, 242, 255, 0.1);
+            box-shadow: 0 15px 40px rgba(0, 242, 255, 0.15);
         }
 
-        .text-cyan-custom { color: #00f2ff; }
-        .bg-cyan-custom { background: #00f2ff; }
-
-        .view-section { animation: fadeIn 0.4s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        .step-card {
-            background: rgba(255,255,255,0.02);
-            border-left: 3px solid #00f2ff;
-        }
-
-        /* Стили заголовка со скриншота */
-        .section-title {
+        /* Стили заголовков как на скриншотах */
+        .section-header {
             display: flex;
             align-items: center;
-            justify-content: center;
             gap: 20px;
-            font-style: italic;
+            width: 100%;
+            margin-bottom: 3rem;
         }
-        .section-title::before, .section-title::after {
+        .section-header::before, .section-header::after {
             content: "";
             height: 1px;
             flex-grow: 1;
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
         }
+
+        .view-section { animation: fadeIn 0.4s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .tutorial-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+            padding: 1.25rem;
+            background: rgba(255,255,255,0.02);
+            border-radius: 12px;
+            border-left: 3px solid #00f2ff;
+        }
+        
+        .step-num {
+            color: #00f2ff;
+            font-weight: 900;
+            font-size: 1.2rem;
+            opacity: 0.5;
+        }
     </style>
 </head>
-<body>
+<body class="min-h-screen">
     <div class="bg-image"></div>
 
     <!-- Навигация -->
-    <nav class="glass sticky top-0 z-50 px-6 py-4 flex justify-between items-center">
+    <nav class="glass sticky top-0 z-50 px-8 py-4 flex justify-between items-center">
         <div class="flex items-center space-x-3 cursor-pointer" onclick="showView('home')">
-            <i class="fas fa-bolt text-cyan-custom text-xl"></i>
-            <span class="text-xl font-black uppercase tracking-tighter">BF6 <span class="text-cyan-custom">ZENITH</span></span>
+            <i class="fas fa-shield-alt text-[#00f2ff] text-xl"></i>
+            <span class="text-xl font-black tracking-tighter uppercase">BF6 <span class="text-[#00f2ff]">ZENITH</span></span>
         </div>
-        <div class="hidden md:flex space-x-8 font-bold uppercase text-[10px] tracking-widest">
-            <a href="#" onclick="showView('home')" class="text-white hover:text-cyan-custom transition">Главная</a>
-            <a href="#" class="text-gray-400 hover:text-white transition">Discord</a>
-            <a href="#" onclick="showView('admin')" class="text-gray-400 hover:text-white transition">Панель</a>
+        <div class="hidden md:flex space-x-10 font-bold uppercase text-[10px] tracking-[0.3em]">
+            <a href="#" onclick="showView('home')" class="hover:text-[#00f2ff] transition text-white">Главная</a>
+            <a href="#" class="text-gray-500 hover:text-white transition">Discord</a>
+            <a href="#" onclick="showView('admin')" class="text-gray-500 hover:text-white transition">Панель</a>
         </div>
     </nav>
 
-    <!-- Главная -->
+    <!-- Главная страница -->
     <main id="view-home" class="view-section">
-        <section class="h-[80vh] flex flex-col justify-center items-center text-center px-6">
-            <h1 class="text-6xl md:text-8xl font-black mb-4 uppercase tracking-tighter leading-none">
-                ОПТИМИЗАЦИЯ <br><span class="text-cyan-custom">BF6</span>
+        <section class="min-h-[75vh] flex flex-col justify-center items-center text-center px-6">
+            <h1 class="text-6xl md:text-9xl font-black mb-4 uppercase tracking-tighter leading-none italic">
+                ОПТИМИЗАЦИЯ <br><span class="text-[#00f2ff]">BF6</span>
             </h1>
-            <p class="text-gray-400 text-sm md:text-lg max-w-xl mx-auto font-light">
-                Профессиональные конфигурации для максимальной производительности. Бесплатно и безопасно.
+            <p class="text-gray-400 text-sm md:text-lg max-w-2xl mx-auto font-light leading-relaxed mb-12">
+                Профессиональные конфигурации для максимальной производительности и стабильного FPS. Полностью бесплатно и безопасно.
             </p>
             
-            <div class="mt-20 cursor-pointer" onclick="document.getElementById('config-grid').scrollIntoView()">
-                <p class="text-[10px] font-bold uppercase tracking-[0.4em] text-cyan-custom mb-2">ЛИСТАЙ ВНИЗ</p>
-                <i class="fas fa-chevron-down text-cyan-custom animate-bounce"></i>
-            </div>
+            <a href="#config-grid" class="flex flex-col items-center text-[10px] font-black uppercase tracking-[0.5em] text-[#00f2ff] hover:text-white transition group">
+                СМОТРЕТЬ ПРЕСЕТЫ
+                <i class="fas fa-chevron-down mt-4 text-xl group-hover:translate-y-2 transition-transform"></i>
+            </a>
         </section>
 
-        <section id="config-grid" class="py-20 px-6 max-w-7xl mx-auto">
-            <div class="section-title mb-16">
-                <h2 class="text-4xl font-black uppercase italic">ДОСТУПНЫЕ <span class="text-cyan-custom">CFG</span></h2>
+        <section id="config-grid" class="py-24 px-8 max-w-7xl mx-auto">
+            <div class="section-header">
+                <h2 class="text-4xl font-black uppercase italic tracking-tighter">ДОСТУПНЫЕ <span class="text-[#00f2ff]">CFG</span></h2>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="main-grid">
-                <!-- Конфиги загрузятся тут -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="main-grid">
+                <!-- Карточки генерируются скриптом -->
             </div>
         </section>
     </main>
 
-    <!-- Описание конфига -->
+    <!-- Страница продукта -->
     <section id="view-product" class="view-section py-20 px-6 hidden">
         <div class="max-w-4xl mx-auto">
-            <button onclick="showView('home')" class="mb-8 text-gray-500 hover:text-white flex items-center uppercase text-[10px] font-bold tracking-widest">
-                <i class="fas fa-arrow-left mr-2"></i> Назад
+            <button onclick="showView('home')" class="mb-10 text-gray-500 hover:text-white transition flex items-center uppercase text-[10px] font-black tracking-widest">
+                <i class="fas fa-arrow-left mr-3"></i> Вернуться назад
             </button>
-            <div class="glass p-8 md:p-12 rounded-3xl" id="product-content"></div>
+            <div class="glass p-10 md:p-16 rounded-[40px]" id="product-content">
+                <!-- Контент генерируется скриптом -->
+            </div>
         </div>
     </section>
 
     <!-- Админка -->
-    <section id="view-admin" class="view-section py-20 px-6 hidden">
-        <div class="max-w-md mx-auto glass p-10 rounded-2xl text-center">
-            <h2 class="text-2xl font-black mb-8 uppercase">Вход в систему</h2>
-            <input type="password" placeholder="Пароль" class="w-full bg-black/40 border border-white/10 p-4 rounded-lg mb-6 outline-none focus:border-cyan-custom">
-            <button class="w-full bg-cyan-custom text-black py-4 rounded-lg font-black uppercase tracking-widest">Войти</button>
+    <section id="view-admin" class="view-section py-24 px-6 hidden">
+        <div class="max-w-md mx-auto glass p-10 rounded-3xl text-center">
+            <i class="fas fa-lock text-4xl mb-6 text-[#00f2ff]"></i>
+            <h2 class="text-2xl font-black mb-8 uppercase tracking-widest">Админ-панель</h2>
+            <input type="password" placeholder="Ключ доступа" class="w-full bg-black/50 border border-white/10 p-4 rounded-xl mb-6 outline-none focus:border-[#00f2ff] transition-colors">
+            <button class="w-full bg-[#00f2ff] text-black py-4 rounded-xl font-black uppercase tracking-widest hover:shadow-[0_0_30px_rgba(0,242,255,0.4)] transition-all">Войти</button>
         </div>
     </section>
 
-    <footer class="py-12 text-center border-t border-white/5 opacity-50 text-[10px] font-bold uppercase tracking-[0.5em]">
-        &copy; 2026 YUSIKYT | BF6 ZENITH LABS
+    <footer class="py-20 text-center border-t border-white/5 opacity-40">
+        <p class="text-gray-500 text-[10px] uppercase tracking-[0.8em] font-bold">© 2026 YUSIKYT | BF6 Zenith Labs</p>
     </footer>
 
     <script>
-        const configs = {
-            'zenith': { title: 'FROSTBITE ZENITH', desc: 'Универсальный стандарт. Оптимизирует тени и частицы без потери качества.', file: 'Frostbite Zenith.zip', icon: 'fa-adjust', color: '#00f2ff' },
-            'ultrafps': { title: 'ZERO LAG ULTRA FPS', desc: 'Минимальные задержки и максимальный FPS для слабых ПК.', file: 'ZERO_LAG_ULTRA_FPS.zip', icon: 'fa-tachometer-alt', color: '#ff8c00' },
-            'net': { title: 'NETWORK MASTER', desc: 'Улучшает регистрацию попаданий и снижает сетевой джиттер.', file: 'NETWORK MASTER.rar', icon: 'fa-wifi', color: '#3b82f6' },
-            'rtx': { title: 'RTX ULTRA PERFORMANCE', desc: 'Для карт 30/40 серии. Оптимальный Reflex и баланс теней.', file: 'RTX ULTRA PERFORMANCE (Для 30 40 серии).rar', icon: 'fa-microchip', color: '#22c55e' },
-            'cpu': { title: 'CPU STABILITY', desc: 'Снижает 0.1% low FPS, убирая микро-фризы процессора.', file: 'CPU STABILITY.rar', icon: 'fa-bolt', color: '#ef4444' },
-            'ai': { title: 'Max FPS Ai cfg', desc: 'Конфиг, созданный на основе анализа бенчмарков ИИ.', file: 'Max FPS Ai cfg.rar', icon: 'fa-robot', color: '#a855f7' }
+        const products = {
+            'zenith': { title: 'Frostbite Zenith', desc: 'Универсальный стандарт. Оптимизирует тени и частицы без потери качества.', file: 'Frostbite Zenith.zip', accent: '#00f2ff', icon: 'fa-adjust' },
+            'ultrafps': { title: 'ZERO LAG ULTRA FPS', desc: 'Минимальные задержки и максимальный FPS для слабых ПК.', file: 'ZERO_LAG_ULTRA_FPS.zip', accent: '#f97316', icon: 'fa-tachometer-alt' },
+            'net-master': { title: 'NETWORK MASTER', desc: 'Улучшает регистрацию попаданий и снижает сетевой джиттер.', file: 'NETWORK MASTER.rar', accent: '#3b82f6', icon: 'fa-wifi' },
+            'rtx-ultra': { title: 'RTX ULTRA PERFORMANCE', desc: 'Для карт 30/40 серии. Оптимальный Reflex и баланс теней.', file: 'RTX ULTRA PERFORMANCE (Для 30 40 серии).rar', accent: '#22c55e', icon: 'fa-microchip' },
+            'cpu-stable': { title: 'CPU STABILITY', desc: 'Снижает 0.1% low FPS, убирая микро-фризы процессора.', file: 'CPU STABILITY.rar', accent: '#ef4444', icon: 'fa-bolt' },
+            'ai-cfg': { title: 'Max FPS Ai cfg', desc: 'Конфиг, созданный на основе анализа бенчмарков ИИ.', file: 'Max FPS Ai cfg.rar', accent: '#a855f7', icon: 'fa-robot' },
+            'pro-comp': { title: 'Pro-Competitive', desc: 'Киберспортивные настройки для лучшей видимости врагов.', file: 'Pro-Competitive.rar', accent: '#eab308', icon: 'fa-crosshairs' },
+            'global-fix': { title: 'GLOBAL SYSTEM FIX', desc: 'Комплексная очистка кэша и реестра для Battlefield 6.', file: 'GLOBAL_FIX.rar', accent: '#ffffff', icon: 'fa-tools' }
         };
 
         const steps = [
-            "Скачайте выбранный архив.",
-            "Распакуйте файлы.",
-            "Перенесите их в Documents/Battlefield 6/settings.",
-            "Замените существующие файлы.",
-            "Запускайте игру."
+            "Скачайте архив по кнопке выше.",
+            "Распакуйте содержимое архива.",
+            "Перейдите в папку Документы/Battlefield 6/settings.",
+            "Перенесите файлы из архива с заменой.",
+            "Запустите игру и наслаждайтесь FPS."
         ];
 
         function renderGrid() {
             const grid = document.getElementById('main-grid');
+            if(!grid) return;
             grid.innerHTML = '';
-            Object.entries(configs).forEach(([id, c]) => {
-                grid.innerHTML += `
-                    <div onclick="showProduct('${id}')" class="card-custom p-8 rounded-2xl cursor-pointer flex flex-col items-start">
-                        <div class="w-12 h-12 rounded-lg flex items-center justify-center mb-6 bg-white/5">
-                            <i class="fas ${c.icon} text-2xl" style="color: ${c.color}"></i>
+            
+            Object.entries(products).forEach(([id, p]) => {
+                const card = document.createElement('div');
+                card.onclick = () => showProduct(id);
+                card.className = "card-custom p-10 rounded-[24px] cursor-pointer flex flex-col h-full group";
+                card.innerHTML = `
+                    <div class="mb-6">
+                        <div class="w-12 h-12 rounded-xl mb-8 flex items-center justify-center bg-white/5 transition-colors group-hover:bg-[#00f2ff]/10">
+                            <i class="fas ${p.icon} text-2xl" style="color: ${p.accent}"></i>
                         </div>
-                        <h3 class="text-xl font-black uppercase mb-2">${c.title}</h3>
-                        <p class="text-gray-400 text-xs font-light leading-relaxed mb-8">${c.desc}</p>
-                        <div class="mt-auto flex items-center text-[10px] font-black uppercase tracking-widest" style="color: ${c.color}">
-                            ПРОСМОТР <i class="fas fa-chevron-right ml-2"></i>
-                        </div>
+                        <h2 class="text-xl font-black uppercase mb-3 text-white tracking-tight">${p.title}</h2>
+                        <p class="text-gray-400 text-xs font-light leading-relaxed">${p.desc}</p>
+                    </div>
+                    <div class="mt-auto pt-8 flex items-center justify-between opacity-50 group-hover:opacity-100 transition-opacity">
+                        <span class="text-[9px] font-black uppercase tracking-[0.3em]" style="color: ${p.accent}">Просмотр</span>
+                        <i class="fas fa-chevron-right text-[10px]" style="color: ${p.accent}"></i>
                     </div>
                 `;
+                grid.appendChild(card);
             });
         }
 
+        function showView(viewId) {
+            ['home', 'product', 'admin'].forEach(v => {
+                const el = document.getElementById('view-' + v);
+                if(el) el.classList.add('hidden');
+            });
+            document.getElementById('view-' + viewId).classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+
         function showProduct(id) {
-            const c = configs[id];
+            const p = products[id];
             document.getElementById('product-content').innerHTML = `
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12">
-                    <div>
-                        <h1 class="text-4xl font-black uppercase mb-2" style="color: ${c.color}">${c.title}</h1>
-                        <p class="text-gray-400">${c.desc}</p>
-                    </div>
-                    <a href="${c.file}" download class="px-8 py-4 bg-cyan-custom text-black font-black uppercase tracking-widest text-xs rounded-xl hover:scale-105 transition" style="background: ${c.color}">Скачать CFG</a>
-                </div>
-                <div class="space-y-4">
-                    <h4 class="text-lg font-black uppercase mb-6 tracking-tighter">Инструкция по установке</h4>
-                    ${steps.map((s, i) => `
-                        <div class="step-card p-5 rounded-xl flex items-center gap-4">
-                            <span class="text-xl font-black opacity-20">${i+1}</span>
-                            <p class="text-sm font-light text-gray-300">${s}</p>
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-10 text-left">
+                    <div class="flex-1">
+                        <div class="flex items-center gap-5 mb-4">
+                             <div class="w-14 h-14 rounded-2xl flex items-center justify-center bg-white/5">
+                                <i class="fas ${p.icon} text-3xl" style="color: ${p.accent}"></i>
+                             </div>
+                             <h1 class="text-3xl md:text-5xl font-black uppercase tracking-tighter" style="color: ${p.accent}">${p.title}</h1>
                         </div>
-                    `).join('')}
+                        <p class="text-gray-400 text-lg font-light leading-relaxed">${p.desc}</p>
+                    </div>
+                    <a href="${p.file}" download class="px-12 py-5 font-black uppercase tracking-widest text-xs text-black rounded-2xl shadow-2xl transition-transform hover:scale-105" style="background: ${p.accent}">
+                        <i class="fas fa-download mr-2"></i> Скачать файл
+                    </a>
+                </div>
+                <div class="h-px bg-white/5 w-full my-12"></div>
+                <div class="text-left">
+                    <h3 class="text-xl font-black uppercase mb-8 tracking-tighter">Инструкция по <span style="color: ${p.accent}">установке</span></h3>
+                    <div class="space-y-4">
+                        ${steps.map((s, i) => `
+                            <div class="tutorial-step" style="border-left-color: ${p.accent}">
+                                <span class="step-num">${i+1}</span>
+                                <p class="text-gray-300 text-sm font-light">${s}</p>
+                            </div>
+                        `).join('')}
+                    </div>
                 </div>
             `;
             showView('product');
-        }
-
-        function showView(viewId) {
-            ['home', 'product', 'admin'].forEach(v => document.getElementById('view-'+v).classList.add('hidden'));
-            document.getElementById('view-'+viewId).classList.remove('hidden');
-            window.scrollTo(0, 0);
         }
 
         window.onload = renderGrid;
