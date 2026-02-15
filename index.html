@@ -94,6 +94,29 @@
             color: var(--accent);
             font-family: monospace;
         }
+
+        .view-section {
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .step-number {
+            width: 30px;
+            height: 30px;
+            background: var(--accent);
+            color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            border-radius: 4px;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
     </style>
 </head>
 <body>
@@ -112,107 +135,92 @@
         </div>
     </nav>
 
-    <main id="view-home" class="max-w-7xl mx-auto px-6 py-16">
-        <div class="mb-12">
-            <h1 class="text-4xl md:text-6xl font-black italic uppercase mb-2">AVAILABLE <span class="text-[#00f2ff]">CFG</span></h1>
-            <p class="text-gray-400 text-xs tracking-widest uppercase">Полный список актуальных конфигураций из репозитория</p>
+    <!-- ОПИСАНИЕ САЙТА -->
+    <header id="site-header" class="max-w-7xl mx-auto px-6 pt-16 text-center">
+        <div class="inline-block border border-[#00f2ff]/30 px-4 py-1 rounded-full mb-6">
+            <span class="text-[9px] uppercase tracking-[0.3em] text-[#00f2ff]">Next-Gen Optimization Hub</span>
+        </div>
+        <h1 class="text-5xl md:text-8xl font-black italic uppercase leading-none mb-6">
+            ТВОЙ ФПС — <br> НАША <span class="text-[#00f2ff]">ЦЕЛЬ</span>
+        </h1>
+        <p class="text-gray-400 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
+            BF6 Zenith — это крупнейший репозиторий профессиональных конфигураций для Battlefield. Мы используем глубокий анализ движка Frostbite, чтобы устранить задержки ввода, стабилизировать время кадра и выжать максимум из твоего железа.
+        </p>
+    </header>
+
+    <!-- ГЛАВНЫЙ СПИСОК -->
+    <main id="view-home" class="view-section max-w-7xl mx-auto px-6 py-16">
+        <div class="mb-12 flex items-center justify-between border-b border-white/10 pb-4">
+            <div>
+                <h2 class="text-2xl font-black italic uppercase">AVAILABLE <span class="text-[#00f2ff]">PRESETS</span></h2>
+                <p class="text-gray-500 text-[10px] tracking-widest uppercase">Выберите конфиг для детальной инструкции</p>
+            </div>
+            <div class="text-[#00f2ff] text-xs font-bold uppercase">v1.0.9 Stable</div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            <!-- 1. CPU STABILITY -->
-            <div class="config-card p-6 rounded-lg cursor-pointer" onclick="download('CPU STABILITY.rar')">
-                <div>
-                    <i class="fas fa-microchip text-red-500 mb-4"></i>
-                    <h3 class="header-font text-sm font-bold mb-2 uppercase">CPU STABILITY</h3>
-                    <p class="text-gray-500 text-[11px]">Стабильность процессора и устранение статтеров.</p>
-                </div>
-                <span class="text-[9px] font-black text-red-500 mt-6 uppercase">Download .rar</span>
-            </div>
-
-            <!-- 2. Frostbite Zenith -->
-            <div class="config-card p-6 rounded-lg cursor-pointer" onclick="download('Frostbite Zenith.zip')">
-                <div>
-                    <i class="fas fa-crown text-[#00f2ff] mb-4"></i>
-                    <h3 class="header-font text-sm font-bold mb-2 uppercase">Frostbite Zenith</h3>
-                    <p class="text-gray-500 text-[11px]">Основной пак. Лучший баланс графики и FPS.</p>
-                </div>
-                <span class="text-[9px] font-black text-[#00f2ff] mt-6 uppercase">Download .zip</span>
-            </div>
-
-            <!-- 3. HDD Anti-Stutter -->
-            <div class="config-card p-6 rounded-lg cursor-pointer" onclick="download('HDD Anti-Stutter.rar')">
-                <div>
-                    <i class="fas fa-hdd text-purple-500 mb-4"></i>
-                    <h3 class="header-font text-sm font-bold mb-2 uppercase">HDD Anti-Stutter</h3>
-                    <p class="text-gray-500 text-[11px]">Оптимизация для классических жестких дисков.</p>
-                </div>
-                <span class="text-[9px] font-black text-purple-500 mt-6 uppercase">Download .rar</span>
-            </div>
-
-            <!-- 4. HDD Fast Streaming -->
-            <div class="config-card p-6 rounded-lg cursor-pointer" onclick="download('HDD Fast Streaming.rar')">
-                <div>
-                    <i class="fas fa-stream text-orange-400 mb-4"></i>
-                    <h3 class="header-font text-sm font-bold mb-2 uppercase">HDD Fast Streaming</h3>
-                    <p class="text-gray-500 text-[11px]">Ускоренная подгрузка ассетов и текстур.</p>
-                </div>
-                <span class="text-[9px] font-black text-orange-400 mt-6 uppercase">Download .rar</span>
-            </div>
-
-            <!-- 5. Max FPS Ai cfg -->
-            <div class="config-card p-6 rounded-lg cursor-pointer" onclick="download('Max FPS Ai cfg.rar')">
-                <div>
-                    <i class="fas fa-robot text-pink-500 mb-4"></i>
-                    <h3 class="header-font text-sm font-bold mb-2 uppercase">Max FPS Ai cfg</h3>
-                    <p class="text-gray-500 text-[11px]">Конфиг, сгенерированный ИИ для максимизации кадров.</p>
-                </div>
-                <span class="text-[9px] font-black text-pink-500 mt-6 uppercase">Download .rar</span>
-            </div>
-
-            <!-- 6. NETWORK MASTER -->
-            <div class="config-card p-6 rounded-lg cursor-pointer" onclick="download('NETWORK MASTER.rar')">
-                <div>
-                    <i class="fas fa-wifi text-blue-400 mb-4"></i>
-                    <h3 class="header-font text-sm font-bold mb-2 uppercase">NETWORK MASTER</h3>
-                    <p class="text-gray-500 text-[11px]">Оптимизация сетевого кода и регистрации урона.</p>
-                </div>
-                <span class="text-[9px] font-black text-blue-400 mt-6 uppercase">Download .rar</span>
-            </div>
-
-            <!-- 7. Pro-Competitive -->
-            <div class="config-card p-6 rounded-lg cursor-pointer" onclick="download('Pro-Competitive.rar')">
-                <div>
-                    <i class="fas fa-crosshairs text-gray-300 mb-4"></i>
-                    <h3 class="header-font text-sm font-bold mb-2 uppercase">Pro-Competitive</h3>
-                    <p class="text-gray-500 text-[11px]">Настройки для киберспорта. Максимальная видимость.</p>
-                </div>
-                <span class="text-[9px] font-black text-gray-300 mt-6 uppercase">Download .rar</span>
-            </div>
-
-            <!-- 8. RTX ULTRA PERFORMANCE -->
-            <div class="config-card p-6 rounded-lg cursor-pointer" onclick="download('RTX ULTRA PERFORMANCE (Для 30 40 серии).rar')">
-                <div>
-                    <i class="fas fa-bolt text-green-400 mb-4"></i>
-                    <h3 class="header-font text-sm font-bold mb-2 uppercase">RTX ULTRA PERF</h3>
-                    <p class="text-gray-500 text-[11px]">Для владельцев карт NVIDIA 30 и 40 серии.</p>
-                </div>
-                <span class="text-[9px] font-black text-green-400 mt-6 uppercase">Download .rar</span>
-            </div>
-
-            <!-- 9. ZERO_LAG_ULTRA_FPS -->
-            <div class="config-card p-6 rounded-lg cursor-pointer" onclick="download('ZERO_LAG_ULTRA_FPS.zip')">
-                <div>
-                    <i class="fas fa-tachometer-alt text-yellow-400 mb-4"></i>
-                    <h3 class="header-font text-sm font-bold mb-2 uppercase">ZERO LAG ULTRA</h3>
-                    <p class="text-gray-500 text-[11px]">Максимальное сжатие для сверхнизкого инпут-лага.</p>
-                </div>
-                <span class="text-[9px] font-black text-yellow-400 mt-6 uppercase">Download .zip</span>
-            </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="configs-grid">
+            <!-- Карточки будут генерироваться JS для управления кликом -->
         </div>
     </main>
 
+    <!-- ДЕТАЛЬНЫЙ ВИД (ТУТОР) -->
+    <section id="view-details" class="hidden view-section max-w-4xl mx-auto px-6 py-16">
+        <button onclick="showView('home')" class="text-[#00f2ff] text-[10px] font-black uppercase mb-8 flex items-center group">
+            <i class="fas fa-arrow-left mr-2 transition-transform group-hover:-translate-x-1"></i> Назад к списку
+        </button>
+
+        <div class="config-card p-10 rounded-2xl border-l-4 border-l-[#00f2ff]">
+            <div class="flex items-center space-x-4 mb-6">
+                <i id="det-icon" class="text-3xl"></i>
+                <div>
+                    <h2 id="det-title" class="header-font text-2xl font-bold uppercase tracking-tighter"></h2>
+                    <p id="det-subtitle" class="text-[#00f2ff] text-[10px] font-black uppercase tracking-widest"></p>
+                </div>
+            </div>
+
+            <p id="det-desc" class="text-gray-400 text-sm mb-10 leading-relaxed italic"></p>
+
+            <div class="space-y-8">
+                <h3 class="header-font text-sm font-bold border-b border-white/10 pb-2">ИНСТРУКЦИЯ ПО УСТАНОВКЕ</h3>
+                
+                <div class="flex items-start">
+                    <div class="step-number">1</div>
+                    <div>
+                        <p class="font-bold text-sm uppercase mb-1">Загрузка файла</p>
+                        <p class="text-gray-500 text-xs">Нажмите кнопку ниже, чтобы скачать архив. Распакуйте его в любое удобное место.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start">
+                    <div class="step-number">2</div>
+                    <div>
+                        <p class="font-bold text-sm uppercase mb-1">Перенос в корень</p>
+                        <p class="text-gray-500 text-xs">Скопируйте файл <code class="text-[#00f2ff]">user.cfg</code> в корневую папку с игрой (там, где находится BF6.exe).</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start">
+                    <div class="step-number">3</div>
+                    <div>
+                        <p class="font-bold text-sm uppercase mb-1">Настройка атрибутов</p>
+                        <p class="text-gray-500 text-xs">Нажмите правой кнопкой на <code class="text-[#00f2ff]">user.cfg</code> -> Свойства -> Поставьте галочку "Только чтение" (Read Only).</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start text-yellow-500 bg-yellow-500/5 p-4 rounded border border-yellow-500/20">
+                    <i class="fas fa-exclamation-triangle mr-3 mt-1"></i>
+                    <p class="text-[10px] font-bold uppercase tracking-wider">Важно: Если у вас уже есть user.cfg, удалите его или сделайте бэкап перед заменой.</p>
+                </div>
+            </div>
+
+            <button id="det-download-btn" class="neo-btn w-full py-4 mt-12 text-sm shadow-[0_0_30px_rgba(0,242,255,0.3)]">
+                СКАЧАТЬ КОНФИГ СЕЙЧАС
+            </button>
+        </div>
+    </section>
+
     <!-- AI Generator Section -->
-    <section id="view-ai" class="hidden max-w-3xl mx-auto px-6 py-20">
+    <section id="view-ai" class="hidden view-section max-w-3xl mx-auto px-6 py-20">
         <div class="config-card p-10 rounded-2xl">
             <h2 class="header-font text-xl font-bold mb-6 uppercase">AI <span class="text-[#00f2ff]">GEN_V1</span></h2>
             <textarea id="ai-prompt" class="terminal-input w-full h-32 p-4 rounded-lg focus:outline-none mb-4 text-xs" placeholder="Напиши свою видеокарту и процессор..."></textarea>
@@ -228,11 +236,131 @@
     <script>
         const apiKey = "";
 
+        const configData = [
+            {
+                id: 'cpu',
+                title: 'CPU Stability',
+                file: 'CPU STABILITY.rar',
+                icon: 'fas fa-microchip text-red-500',
+                color: 'text-red-500',
+                desc: 'Этот пресет перераспределяет нагрузку между потоками процессора, устраняя микро-фризы и статтеры. Идеально для процессоров с малым количеством ядер или старых поколений Intel/AMD.',
+                subtitle: 'Плавность и стабильность потоков'
+            },
+            {
+                id: 'zenith',
+                title: 'Frostbite Zenith',
+                file: 'Frostbite Zenith.zip',
+                icon: 'fas fa-crown text-[#00f2ff]',
+                color: 'text-[#00f2ff]',
+                desc: 'Король всех пресетов. Сбалансированная настройка освещения, теней и постобработки. Вы получаете картинку уровня "High", а производительность — как на "Low".',
+                subtitle: 'Лучший баланс v1.0'
+            },
+            {
+                id: 'hdd-anti',
+                title: 'HDD Anti-Stutter',
+                file: 'HDD Anti-Stutter.rar',
+                icon: 'fas fa-hdd text-purple-500',
+                color: 'text-purple-500',
+                desc: 'Снижает интенсивность обращения игры к жесткому диску во время боя. Устраняет заикания звука и резкие просадки при подгрузке новых локаций на карте.',
+                subtitle: 'Оптимизация чтения данных'
+            },
+            {
+                id: 'hdd-fast',
+                title: 'HDD Fast Streaming',
+                file: 'HDD Fast Streaming.rar',
+                icon: 'fas fa-stream text-orange-400',
+                color: 'text-orange-400',
+                desc: 'Ускоряет стриминг текстур и мешей. Объекты перестают появляться "из воздуха", а время загрузки уровня сокращается на 15-20%.',
+                subtitle: 'Ускоренная подгрузка'
+            },
+            {
+                id: 'ai-cfg',
+                title: 'Max FPS Ai cfg',
+                file: 'Max FPS Ai cfg.rar',
+                icon: 'fas fa-robot text-pink-500',
+                color: 'text-pink-500',
+                desc: 'Экспериментальный конфиг, созданный на основе анализа миллионов кадров. Отключает скрытые параметры движка, недоступные в меню игры.',
+                subtitle: 'Нейросетевая оптимизация'
+            },
+            {
+                id: 'net',
+                title: 'NETWORK MASTER',
+                file: 'NETWORK MASTER.rar',
+                icon: 'fas fa-wifi text-blue-400',
+                color: 'text-blue-400',
+                desc: 'Настройка сетевого буфера и интерполяции. Уменьшает задержку между выстрелом и регистрацией попадания. Ваше преимущество в миллисекундах.',
+                subtitle: 'Доминирование в сети'
+            },
+            {
+                id: 'pro',
+                title: 'Pro-Competitive',
+                file: 'Pro-Competitive.rar',
+                icon: 'fas fa-crosshairs text-gray-300',
+                color: 'text-gray-300',
+                desc: 'Конфиг для тех, кто играет на результат. Убирает лишние визуальные эффекты (пыль, блюр, частицы), мешающие обзору и обнаружению противника.',
+                subtitle: 'Киберспортивный стандарт'
+            },
+            {
+                id: 'rtx',
+                title: 'RTX ULTRA PERF',
+                file: 'RTX ULTRA PERFORMANCE (Для 30 40 серии).rar',
+                icon: 'fas fa-bolt text-green-400',
+                color: 'text-green-400',
+                desc: 'Тонкая настройка тензорных ядер и DLSS. Позволяет получить стабильные 144+ FPS при включенных лучах или максимальных настройках на картах 30/40 серии.',
+                subtitle: 'NVIDIA Power Only'
+            },
+            {
+                id: 'zero',
+                title: 'ZERO LAG ULTRA',
+                file: 'ZERO_LAG_ULTRA_FPS.zip',
+                icon: 'fas fa-tachometer-alt text-yellow-400',
+                color: 'text-yellow-400',
+                desc: 'Самый агрессивный пресет. Отключает практически всё, что можно отключить в движке Frostbite. Минимальный Input Lag, который только возможен.',
+                subtitle: 'Максимальный FPS'
+            }
+        ];
+
+        function initGrid() {
+            const grid = document.getElementById('configs-grid');
+            grid.innerHTML = configData.map(cfg => `
+                <div class="config-card p-6 rounded-lg cursor-pointer" onclick="openDetails('${cfg.id}')">
+                    <div>
+                        <i class="${cfg.icon} mb-4"></i>
+                        <h3 class="header-font text-sm font-bold mb-2 uppercase">${cfg.title}</h3>
+                        <p class="text-gray-500 text-[11px] line-clamp-2">${cfg.desc}</p>
+                    </div>
+                    <div class="flex justify-between items-center mt-6">
+                        <span class="text-[9px] font-black ${cfg.color} uppercase">Детали и тутор</span>
+                        <i class="fas fa-chevron-right text-[10px] text-gray-600"></i>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function openDetails(id) {
+            const cfg = configData.find(c => c.id === id);
+            if(!cfg) return;
+
+            document.getElementById('det-title').innerText = cfg.title;
+            document.getElementById('det-subtitle').innerText = cfg.subtitle;
+            document.getElementById('det-desc').innerText = cfg.desc;
+            document.getElementById('det-icon').className = cfg.icon;
+            document.getElementById('det-download-btn').onclick = () => download(cfg.file);
+
+            showView('details');
+        }
+
         function showView(id) {
-            document.getElementById('view-home').classList.toggle('hidden', id !== 'home');
-            document.getElementById('view-ai').classList.toggle('hidden', id !== 'ai');
+            document.getElementById('view-home').classList.add('hidden');
+            document.getElementById('view-ai').classList.add('hidden');
+            document.getElementById('view-details').classList.add('hidden');
+            document.getElementById('site-header').classList.toggle('hidden', id !== 'home');
+
+            document.getElementById('view-' + id).classList.remove('hidden');
+            
             document.getElementById('nav-home').classList.toggle('active', id === 'home');
             document.getElementById('nav-ai').classList.toggle('active', id === 'ai');
+            
             window.scrollTo(0,0);
         }
 
@@ -272,6 +400,9 @@
             const a = document.createElement('a');
             a.href = u; a.download = 'user.cfg'; a.click();
         }
+
+        // Запуск
+        initGrid();
     </script>
 </body>
 </html>
