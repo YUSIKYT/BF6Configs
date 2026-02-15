@@ -124,8 +124,8 @@
                 <i class="fas fa-chevron-down mt-2 text-xl scroll-indicator"></i>
             </a>
 
-            <!-- Промо-фото с исправленным путем и обработкой ошибок -->
-            <img src="image_e357e5.png" alt="BF6 Soldiers" class="promo-image" onerror="this.style.display='none'">
+            <!-- Промо-фото с названием image.png -->
+            <img src="image.png" alt="BF6 Soldiers" class="promo-image" onerror="this.src='image_e357e5.png'; this.onerror=function(){this.style.display='none'}">
         </section>
 
         <!-- Сетка конфигов -->
@@ -237,6 +237,7 @@
 
         function renderGrid() {
             const grid = document.querySelector('#config-grid .grid');
+            if(!grid) return;
             grid.innerHTML = '';
             Object.entries(products).forEach(([id, p]) => {
                 const card = document.createElement('div');
@@ -282,7 +283,6 @@
             showView('product');
         }
 
-        // Инициализация при загрузке
         window.onload = renderGrid;
     </script>
 </body>
